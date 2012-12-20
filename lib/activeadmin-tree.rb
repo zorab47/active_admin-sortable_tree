@@ -1,4 +1,1 @@
-require "activeadmin-tree/engine"
-
-module ActiveadminTree
-end
+require 'active_admin/tree'

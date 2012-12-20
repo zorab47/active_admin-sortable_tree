@@ -1,0 +1,24 @@
+ol.index_tree {
+    > li {
+        border: 1px solid red;
+        &.odd {
+            background-color: #DDD;
+        }
+        &:hover {
+            background-color: yellow;
+        }
+
+        .tr {
+            display: table-row;
+            width: 100%;
+
+            .td {
+                display: table-cell;
+            }
+        }
+
+        > ol {
+            margin-left: 40px;
+        }
+    }
+}
