@@ -33,7 +33,7 @@ module ActiveAdmin
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
-        ol :class => "index_tree", :"data-sortable" => "tree" do
+        ol :"data-sortable" => "tree" do
           collection.each do |item|
             build_item(item)
           end
@@ -41,15 +41,15 @@ module ActiveAdmin
       end
 
       def build_item(item)
-        li :class => cycle("odd", "even", :name => "list_class"), :id => "#{active_admin_config.resource_name}_#{item.id}".downcase do
-          div :class => "tr" do
-            div :class => "td" do
+        li :id => "#{active_admin_config.resource_name}_#{item.id}".downcase do
+          div :class => "item " << cycle("odd", "even", :name => "list_class") do
+            div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
-            h3 :class => "td" do
+            h3 :class => "cell left" do
               call_method_or_proc_on(item, @label)
             end
-            div :class => "td" do
+            div :class => "cell right" do
               build_default_actions(item) if @default_actions
             end
           end

@@ -1,24 +1,46 @@
-ol.index_tree {
-    > li {
-        border: 1px solid red;
-        &.odd {
-            background-color: #DDD;
-        }
-        &:hover {
-            background-color: yellow;
+.index_as_tree ol {
+    li {
+        &.placeholder {
+            border: 1px solid blue;
         }
 
-        .tr {
-            display: table-row;
+        .item {
             width: 100%;
+            border-bottom: 1px solid red;/* #E8E8E8; */
 
-            .td {
-                display: table-cell;
+            &.odd {
+                background-color: #DDD;
+            }
+            &:hover {
+                background-color: yellow;
+                cursor: pointer;
+            }
+
+            /* clearfix */
+            &:after {
+                content: ".";
+                display: block;
+                clear: both;
+                height: 0;
+                visibility: hidden;
+            }
+
+            .cell {
+                margin: 0;
+                padding: 10px 12px 8px 12px;
+            }
+
+            h3.cell {
+                font-size: 16px;
+                line-height: 14px;
             }
         }
+    }
 
+    /* nested styles */
+    > li {
         > ol {
-            margin-left: 40px;
+            margin-left: 20px;
         }
     }
 }

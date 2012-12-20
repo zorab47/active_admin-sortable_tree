@@ -13,7 +13,7 @@ $ ->
     depthFinder($this)
     $this.nestedSortable
       forcePlaceholderSize: true,
-      handle: 'h3'
+      handle: '> .item'
       listType: 'ol'
       items: 'li'
       opacity: .6
