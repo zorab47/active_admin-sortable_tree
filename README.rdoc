@@ -1,3 +1,5 @@
-= ActiveadminTree
+= ActiveAdmin Tree
 
-This project rocks and uses MIT-LICENSE.
+
+This project is a stub, API may change withoyt advice.
+Use at your own risk!

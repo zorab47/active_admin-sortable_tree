@@ -1,46 +1,65 @@
-.index_as_tree ol {
-    li {
-        &.placeholder {
-            border: 1px solid blue;
-        }
+$cOddRowBackground: #F4F5F5;
+$cRowBorder: #E8E8E8;
+$cRowSelected: #D9E4EC;
 
-        .item {
-            width: 100%;
-            border-bottom: 1px solid red;/* #E8E8E8; */
+@import "compass/css3/box-sizing";
 
-            &.odd {
-                background-color: #DDD;
+body.active_admin {
+
+    .index_as_tree {
+        .resource_selection_toggle_panel { padding-left: 12px; }
+
+        > ol { margin: 16px 0; }
+
+        ol {
+            li {
+                &.placeholder {
+                    border: 1px solid blue;
+                    background: lighten($cOddRowBackground, 10%);
+                    border: 1px dashed $cRowSelected;
+                    @include box-sizing(border-box);
+                }
+
+                .item {
+                    width: 100%;
+                    border-bottom: 1px solid $cRowBorder;
+
+                    &.even { background: white; }
+
+                    &.odd { background: $cOddRowBackground; }
+
+                    &:hover {
+                        background-color: $cRowSelected;
+                        cursor: pointer;
+                    }
+
+                    /* clearfix */
+                    &:after {
+                        content: ".";
+                        display: block;
+                        clear: both;
+                        height: 0;
+                        visibility: hidden;
+                    }
+
+                    .cell {
+                        margin: 0;
+                        padding: 10px 12px 8px 12px;
+                    }
+
+                    h3.cell {
+                        font-size: 16px;
+                        line-height: 14px;
+                        color: black;
+                    }
+                }
             }
-            &:hover {
-                background-color: yellow;
-                cursor: pointer;
-            }
 
-            /* clearfix */
-            &:after {
-                content: ".";
-                display: block;
-                clear: both;
-                height: 0;
-                visibility: hidden;
+            > li {
+                > ol {
+                    margin-left: 30px;
+                }
             }
-
-            .cell {
-                margin: 0;
-                padding: 10px 12px 8px 12px;
-            }
-
-            h3.cell {
-                font-size: 16px;
-                line-height: 14px;
-            }
-        }
-    }
-
-    /* nested styles */
-    > li {
-        > ol {
-            margin-left: 20px;
         }
     }
 }

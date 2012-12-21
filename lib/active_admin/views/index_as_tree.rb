@@ -5,7 +5,8 @@ module ActiveAdmin
     class IndexAsTree < ActiveAdmin::Component
       def build(page_presenter, collection)
         @page_presenter = page_presenter
-        @collection = collection
+        @options = active_admin_config.dsl.sortable_options
+        @collection = resource_class.send(@options[:roots_method]).order(@options[:sorting_attribute])
 
         # Call the block passed in. This will set the
         # title and body methods
@@ -33,15 +34,18 @@ module ActiveAdmin
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
-        ol :"data-sortable" => "tree" do
-          collection.each do |item|
-            build_item(item)
+        sort_url = url_for([:sort_tree, :admin, resource_class])
+
+        ol :"data-sortable-type" => "tree", :"data-sortable-url" => sort_url do
+          @collection.each do |item|
+            build_nested_item(item)
           end
         end
       end
 
-      def build_item(item)
-        li :id => "#{active_admin_config.resource_name}_#{item.id}".downcase do
+      def build_nested_item(item)
+        li :id => "#{active_admin_config.resource_name.downcase}_#{item.id}" do
+
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
@@ -51,6 +55,12 @@ module ActiveAdmin
             end
             div :class => "cell right" do
               build_default_actions(item) if @default_actions
+            end
+          end
+
+          ol do
+            item.send(@options[:children_method]).order(@options[:sorting_attribute]).each do |c|
+              build_nested_item(c)
             end
           end
         end
