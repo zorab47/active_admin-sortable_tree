@@ -1,7 +1,7 @@
 module ActiveAdmin
   module Views
 
-    # = Index as a Sortable Tree
+    # = Index as a Sortable List or Tree
     class IndexAsSortable < ActiveAdmin::Component
       def build(page_presenter, collection)
         @page_presenter = page_presenter
@@ -11,7 +11,9 @@ module ActiveAdmin
                       else
                         collection
                       end
-        @collection = @collection.order(@options[:sorting_attribute])
+        @collection.sort_by! do |a|
+          a.send(@options[:sorting_attribute]) || 1
+        end
 
         # Call the block passed in. This will set the
         # title and body methods
@@ -40,8 +42,9 @@ module ActiveAdmin
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
         sort_url = url_for([:sort, :admin, resource_class])
+        sort_type = @options[:tree] ? "tree" : "list"
 
-        ol :"data-sortable-type" => "tree", :"data-sortable-url" => sort_url do
+        ol :"data-sortable-type" => sort_type, :"data-sortable-url" => sort_url do
           @collection.each do |item|
             build_nested_item(item)
           end

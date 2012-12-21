@@ -1,14 +1,14 @@
-module ActiveAdmin::Tree
+module ActiveAdmin::Sortable
   module ControllerActions
 
     attr_accessor :sortable_options
 
     def sortable(options = {})
-      options.reverse_merge! sorting_attribute: :position,
-                             parent_method: :parent,
-                             children_method: :children,
-                             roots_method: :roots,
-                             tree: false
+      options.reverse_merge! :sorting_attribute => :position,
+                             :parent_method => :parent,
+                             :children_method => :children,
+                             :roots_method => :roots,
+                             :tree => false
 
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options

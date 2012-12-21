@@ -1,5 +1,5 @@
 module ActiveAdmin
-  module Tree
+  module Sortable
     class Engine < ::Rails::Engine
       engine_name 'activeadmin_tree'
 

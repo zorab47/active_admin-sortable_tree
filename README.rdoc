@@ -1,5 +1,68 @@
-= ActiveAdmin Tree
+= ActiveAdmin Sortable Tree
+
+This engine adds a tree view to your ActiveAdmin resource index,
+sortable via drag'n'drop.
 
 
-This project is a stub, API may change withoyt advice.
-Use at your own risk!
+== Usage (Tree)
+
+* Admin (eg. app/admin/page.rb):
+
+  ActiveAdmin.register Page do
+    sortable tree: true
+
+    index :as => :sortable do
+      label :title # item content
+      default_actions
+    end
+  end
+
+* Model: activeadmin-sortable-tree is agnostic to the tree
+  implementation. All you have to do is expose a sorting attribute and
+  a few tree methods (:parent, :children and :roots).
+  Let's say you use Ancestry[https://github.com/stefankroes/ancestry]:
+
+  class Page < ActiveRecord::Base
+    attr_accessible :title, :body, :position
+    has_ancestry :orphan_strategy => :rootify
+  end
+
+
+  You can configure these methods if you need:
+
+  ActiveAdmin.register Page do
+    sortable tree: true,
+             sorting_attribute: :position,
+             parent_method: :parent,
+             children_method: :children,
+             roots_method: :roots
+    ...
+  end
+
+
+== Usage (List)
+
+* Admin (eg. app/admin/page.rb):
+
+  ActiveAdmin.register Page do
+    sortable
+
+    index :as => :sortable do
+      label :title # item content
+      default_actions
+    end
+  end
+
+* Model: Sortable list assumes you have a :position field in your
+  resource. Of course it's configurable:
+
+  ActiveAdmin.register Page do
+    sortable tree: false, # default
+             sorting_attribute: :my_position_field
+    ...
+  end
+
+
+== Copyright
+
+Copyright © 2012 Francesco Disperati, Cantiere Creativo. See the file MIT-LICENSE for details.
