@@ -1,7 +1,7 @@
 #= require jquery.mjs.nestedSortable
 
 $ ->
-  $(".index_as_tree [data-sortable-type=tree]").each ->
+  $(".index_as_sortable [data-sortable-type=tree]").each ->
     $this = $(this)
     $this.nestedSortable
       forcePlaceholderSize: true,

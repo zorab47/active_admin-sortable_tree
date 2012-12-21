@@ -1,0 +1,44 @@
+$cOddRowBackground: #f4f5f5
+$cRowBorder: #e8e8e8
+$cRowSelected: #d9e4ec
+
+@import compass/css3/box-sizing
+
+body.active_admin .index_as_sortable
+  .resource_selection_toggle_panel
+    padding-left: 12px
+  > ol
+    margin: 16px 0
+  ol
+    li
+      &.placeholder
+        border: 1px solid blue
+        background: lighten($cOddRowBackground, 10%)
+        border: 1px dashed $cRowSelected
+        +box-sizing(border-box)
+      .item
+        width: 100%
+        border-bottom: 1px solid $cRowBorder
+        &.even
+          background: white
+        &.odd
+          background: $cOddRowBackground
+        &:hover
+          background-color: $cRowSelected
+          cursor: pointer
+        /* clearfix
+        &:after
+          content: "."
+          display: block
+          clear: both
+          height: 0
+          visibility: hidden
+        .cell
+          margin: 0
+          padding: 10px 12px 8px 12px
+        h3.cell
+          font-size: 16px
+          line-height: 14px
+          color: black
+    > li > ol
+      margin-left: 30px

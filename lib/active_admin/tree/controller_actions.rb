@@ -3,15 +3,17 @@ module ActiveAdmin::Tree
 
     attr_accessor :sortable_options
 
-    def sortable_tree(options = {})
-      options.reverse_merge! :sorting_attribute => :position,
-                             :parent_method => :parent,
-                             :children_method => :children,
-                             :roots_method => :roots
+    def sortable(options = {})
+      options.reverse_merge! sorting_attribute: :position,
+                             parent_method: :parent,
+                             children_method: :children,
+                             roots_method: :roots,
+                             tree: false
+
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options
 
-      collection_action :sort_tree, :method => :post do
+      collection_action :sort, :method => :post do
         resource_name = resource_class.name.underscore
 
         records = params[resource_name].inject({}) do |res, (resource, parent_resource)|
@@ -20,7 +22,9 @@ module ActiveAdmin::Tree
         end
         records.each_with_index do |(record, parent_record), position|
           record.send "#{options[:sorting_attribute]}=", position
-          record.send "#{options[:parent_method]}=", parent_record
+          if options[:tree]
+            record.send "#{options[:parent_method]}=", parent_record
+          end
           record.save!
         end
         head 200
