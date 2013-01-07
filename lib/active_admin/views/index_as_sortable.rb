@@ -52,7 +52,7 @@ module ActiveAdmin
       end
 
       def build_nested_item(item)
-        li :id => "#{active_admin_config.resource_name.downcase}_#{item.id}" do
+        li :id => "#{active_admin_config.resource_name.underscore.parameterize('_')}_#{item.id}" do
 
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
