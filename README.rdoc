@@ -32,6 +32,7 @@ both sortable via drag'n'drop.
 
     ActiveAdmin.register Page do
       sortable tree: true,
+               max_levels: 0, # infinite indent levels
                sorting_attribute: :position,
                parent_method: :parent,
                children_method: :children,

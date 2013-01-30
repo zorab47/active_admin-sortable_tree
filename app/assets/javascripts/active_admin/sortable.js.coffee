@@ -2,9 +2,9 @@
 
 $ ->
   $(".index_as_sortable [data-sortable-type]").each ->
-    $this = $(this)
+    $this = $(@)
     if $this.data('sortable-type') == "tree"
-      max_levels = 0
+      max_levels = if $this.data('max-levels') then $this.data('max-levels') else 0
       tab_hack = 20 # nestedSortable default
     else
       max_levels = 1

@@ -41,10 +41,13 @@ module ActiveAdmin
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
-        sort_url = url_for([:sort, :admin, resource_class])
-        sort_type = @options[:tree] ? "tree" : "list"
+        data_options = {
+          "data-sortable-type" => (@options[:tree] ? "tree" : "list"),
+          "data-sortable-url" => (url_for([:sort, :admin, resource_class])),
+        }
+        data_options["data-max-levels"] = @options[:max_levels] if @options[:max_levels].present?
 
-        ol :"data-sortable-type" => sort_type, :"data-sortable-url" => sort_url do
+        ol data_options do
           @collection.each do |item|
             build_nested_item(item)
           end
