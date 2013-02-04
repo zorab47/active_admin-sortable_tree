@@ -14,6 +14,7 @@ module ActiveAdmin
         @collection.sort_by! do |a|
           a.send(@options[:sorting_attribute]) || 1
         end
+        @resource_name = active_admin_config.resource_name.underscore.parameterize('_')
 
         # Call the block passed in. This will set the
         # title and body methods
@@ -43,7 +44,7 @@ module ActiveAdmin
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
         data_options = {
           "data-sortable-type" => (@options[:tree] ? "tree" : "list"),
-          "data-sortable-url" => (url_for([:sort, :admin, resource_class])),
+          "data-sortable-url" => (url_for([:sort, :admin, @resource_name.pluralize])),
         }
         data_options["data-max-levels"] = @options[:max_levels] if @options[:max_levels].present?
 
@@ -55,7 +56,7 @@ module ActiveAdmin
       end
 
       def build_nested_item(item)
-        li :id => "#{active_admin_config.resource_name.underscore.parameterize('_')}_#{item.id}" do
+        li :id => "#{@resource_name}_#{item.id}" do
 
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
