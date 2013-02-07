@@ -20,14 +20,19 @@ module ActiveAdmin::Sortable
           res[resource_class.find(resource)] = resource_class.find(parent_resource) rescue nil
           res
         end
+        errors = []
         records.each_with_index do |(record, parent_record), position|
           record.send "#{options[:sorting_attribute]}=", position
           if options[:tree]
             record.send "#{options[:parent_method]}=", parent_record
           end
-          record.save!
+          errors << {record.id => record.errors} if !record.save
         end
-        head 200
+        if errors
+          render json: errors, status: 422
+        else
+          head 200
+        end
       end
 
     end
