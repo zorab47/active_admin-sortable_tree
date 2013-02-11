@@ -28,10 +28,10 @@ module ActiveAdmin::Sortable
           end
           errors << {record.id => record.errors} if !record.save
         end
-        if errors
-          render json: errors, status: 422
-        else
+        if errors.empty?
           head 200
+        else
+          render json: errors, status: 422
         end
       end
 
