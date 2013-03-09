@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["nebirhos@aol.com"]
   s.homepage    = "https://github.com/nebirhos/activeadmin-sortable-tree"
   s.summary     = "Show ActiveAdmin index as a nested tree, with drag'n'drop"
-  s.description = "TODO: Description of ActiveadminTree."
+  s.description = "Show ActiveAdmin index as a nested tree, with drag'n'drop"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
