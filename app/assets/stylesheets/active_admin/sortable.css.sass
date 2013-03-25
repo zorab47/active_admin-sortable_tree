@@ -1,6 +1,7 @@
 $cOddRowBackground: #f4f5f5
 $cRowBorder: #e8e8e8
 $cRowSelected: #d9e4ec
+$cRowError: rgb(255,87,87)
 
 @import bourbon
 
@@ -14,13 +15,16 @@ body.active_admin .index_as_sortable
   ol
     li
       &.placeholder
-        border: 1px solid blue
         background: lighten($cOddRowBackground, 10%)
         border: 1px dashed $cRowSelected
         +box-sizing(border-box)
 
+        &.cantdoit
+          border: 1px dashed $cRowError
+
       .item
         width: 100%
+        border-top: 1px solid $cRowBorder
         border-bottom: 1px solid $cRowBorder
         +clearfix
 

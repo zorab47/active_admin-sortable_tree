@@ -9,16 +9,25 @@ $ ->
     else
       max_levels = 1
       tab_hack = 99999
+    protect_root = if $this.data('protect-root') then true else false
 
     $this.nestedSortable
-      forcePlaceholderSize: true,
+      forcePlaceholderSize: true
+      forceHelperSizeType: true
+      errorClass: 'cantdoit'
+      disableNesting: 'cantdoit'
       handle: '> .item'
       listType: 'ol'
       items: 'li'
       opacity: .6
-      placeholder: 'placeholder',
+      placeholder: 'placeholder'
+      revert: 250
       maxLevels: max_levels,
       tabSize: tab_hack
+      protectRoot: protect_root
+      # prevent drag flickers
+      tolerance: 'pointer'
+      toleranceElement: '> div'
       update: ->
         $this.nestedSortable("disable")
         $.ajax
