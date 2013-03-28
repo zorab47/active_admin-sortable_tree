@@ -44,7 +44,7 @@ module ActiveAdmin
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
         data_options = {
           "data-sortable-type" => (@options[:tree] ? "tree" : "list"),
-          "data-sortable-url" => (url_for([:sort, :admin, @resource_name.pluralize])),
+          "data-sortable-url" => (url_for([:sort, ActiveAdmin.default_namespace, @resource_name.pluralize])),
         }
         data_options["data-max-levels"] = @options[:max_levels] if @options[:max_levels].present?
         data_options["data-protect-root"] = true if @options[:protect_root].present?
