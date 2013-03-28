@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.2.9"
-  # s.add_dependency "jquery-rails"
+  s.add_dependency "activeadmin"
 
   s.add_development_dependency "sqlite3"
 end
