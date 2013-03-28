@@ -1,3 +1,5 @@
+require 'activeadmin'
+
 module ActiveAdmin
   module Sortable
     class Engine < ::Rails::Engine
