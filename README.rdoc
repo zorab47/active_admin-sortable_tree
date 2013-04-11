@@ -65,6 +65,23 @@ both sortable via drag'n'drop.
     end
 
 
+== Usage (generic ActiveAdmin index)
+
+Currently supports only IndexAsBlock, more to come!
+
+* Admin (eg. app/admin/page.rb):
+
+    ActiveAdmin.register Page do
+      sortable
+
+      index :as => :block do |page|
+        # item content
+      end
+    end
+
+* Model: Same as list view (see above)
+
+
 == Copyright
 
-Copyright © 2012 Francesco Disperati, Cantiere Creativo. See the file MIT-LICENSE for details.
+Copyright © 2013 Francesco Disperati, Cantiere Creativo. See the file MIT-LICENSE for details.

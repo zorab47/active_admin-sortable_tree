@@ -8,7 +8,9 @@ module ActiveAdmin::Sortable
                              :parent_method => :parent,
                              :children_method => :children,
                              :roots_method => :roots,
-                             :tree => false
+                             :tree => false,
+                             :max_levels => 0,
+                             :protect_root => false
 
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options

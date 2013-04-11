@@ -46,8 +46,8 @@ module ActiveAdmin
           "data-sortable-type" => (@options[:tree] ? "tree" : "list"),
           "data-sortable-url" => (url_for([:sort, ActiveAdmin.default_namespace, @resource_name.pluralize])),
         }
-        data_options["data-max-levels"] = @options[:max_levels] if @options[:max_levels].present?
-        data_options["data-protect-root"] = true if @options[:protect_root].present?
+        data_options["data-max-levels"] = @options[:max_levels]
+        data_options["data-protect-root"] = true if @options[:protect_root]
 
         ol data_options do
           @collection.each do |item|

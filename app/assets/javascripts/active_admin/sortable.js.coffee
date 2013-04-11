@@ -1,15 +1,28 @@
 #= require jquery.mjs.nestedSortable
 
 $ ->
+  $("[data-sortable-type=plain]").each ->
+    $this = $(@)
+    $this.sortable
+      revert: 250
+      update: ->
+        $this.sortable("disable")
+        $.ajax
+          url: $this.data("sortable-url")
+          type: "post"
+          data: $this.sortable("serialize")
+        .always ->
+          $this.sortable("enable")
+    .disableSelection()
+
   $(".index_as_sortable [data-sortable-type]").each ->
     $this = $(@)
     if $this.data('sortable-type') == "tree"
-      max_levels = if $this.data('max-levels') then $this.data('max-levels') else 0
+      max_levels = $this.data('max-levels')
       tab_hack = 20 # nestedSortable default
     else
       max_levels = 1
       tab_hack = 99999
-    protect_root = if $this.data('protect-root') then true else false
 
     $this.nestedSortable
       forcePlaceholderSize: true
@@ -24,7 +37,7 @@ $ ->
       revert: 250
       maxLevels: max_levels,
       tabSize: tab_hack
-      protectRoot: protect_root
+      protectRoot: $this.data('protect-root')
       # prevent drag flickers
       tolerance: 'pointer'
       toleranceElement: '> div'

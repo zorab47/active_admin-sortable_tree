@@ -5,47 +5,54 @@ $cRowError: rgb(255,87,87)
 
 @import bourbon
 
-body.active_admin .index_as_sortable
-  .resource_selection_toggle_panel
-    padding-left: 12px
+body.active_admin
+  .index_content
+    .ui-sortable > *
+      cursor: move
 
-  > ol
-    margin: 16px 0
+  .index_as_sortable
+    .resource_selection_toggle_panel
+      padding-left: 12px
 
-  ol
-    li
-      &.placeholder
-        background: lighten($cOddRowBackground, 10%)
-        border: 1px dashed $cRowSelected
-        +box-sizing(border-box)
+    > ol
+      margin: 16px 0
 
-        &.cantdoit
-          border: 1px dashed $cRowError
+    ol
+      li
+        cursor: default !important
 
-      .item
-        width: 100%
-        border-top: 1px solid $cRowBorder
-        border-bottom: 1px solid $cRowBorder
-        +clearfix
+        &.placeholder
+          background: lighten($cOddRowBackground, 10%)
+          border: 1px dashed $cRowSelected
+          +box-sizing(border-box)
 
-        &.even
-          background: white
+          &.cantdoit
+            border: 1px dashed $cRowError
 
-        &.odd
-          background: $cOddRowBackground
+        .item
+          width: 100%
+          border-top: 1px solid $cRowBorder
+          border-bottom: 1px solid $cRowBorder
+          +clearfix
 
-        &:hover
-          background-color: $cRowSelected
-          cursor: pointer
+          &.even
+            background: white
 
-        .cell
-          margin: 0
-          padding: 10px 12px 8px 12px
+          &.odd
+            background: $cOddRowBackground
 
-        h3.cell
-          font-size: 16px
-          line-height: 14px
-          color: black
+          &:hover
+            background-color: $cRowSelected
+            cursor: move
 
-    > li > ol
-      margin-left: 30px
+          .cell
+            margin: 0
+            padding: 10px 12px 8px 12px
+
+          h3.cell
+            font-size: 16px
+            line-height: 14px
+            color: black
+
+      > li > ol
+        margin-left: 30px
