@@ -4,6 +4,13 @@ This gem adds a tree and a list view to your ActiveAdmin resource index,
 both sortable via drag'n'drop.
 
 
+== Installation
+
+* Gemfile:
+
+    gem "activeadmin-sortable-tree", :github => "nebirhos/activeadmin-sortable-tree", :branch => "master"
+
+
 == Usage (Tree)
 
 * Admin (eg. app/admin/page.rb):
