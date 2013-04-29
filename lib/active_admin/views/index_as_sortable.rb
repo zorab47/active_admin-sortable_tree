@@ -24,6 +24,8 @@ module ActiveAdmin
         build_list
       end
 
+      def self.index_name; "sortable"; end
+
       # Setter method for the configuration of the label
       def label(method = nil, &block)
         if block_given? || method
