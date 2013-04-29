@@ -15,6 +15,9 @@ module ActiveAdmin::Sortable
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options
 
+      # disable pagination
+      config.paginate = false
+
       collection_action :sort, :method => :post do
         resource_name = active_admin_config.resource_name.underscore.parameterize('_')
 
