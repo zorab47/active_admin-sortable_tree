@@ -7,7 +7,14 @@ module ActiveAdmin
         if active_admin_config.dsl.sortable_options
           resource_name = active_admin_config.resource_name.underscore.parameterize('_')
           set_attribute "data-sortable-type", "plain"
-          set_attribute "data-sortable-url", (url_for([:sort, ActiveAdmin.default_namespace, resource_name.pluralize]))
+
+          sort_url = if (( sort_url_block = active_admin_config.dsl.sortable_options[:sort_url] ))
+                       sort_url_block.call(self)
+                     else
+                       url_for([:sort, ActiveAdmin.default_namespace, resource_name.pluralize])
+                     end
+
+          set_attribute "data-sortable-url", sort_url
           collection.sort_by! do |a|
             a.send(active_admin_config.dsl.sortable_options[:sorting_attribute]) || 1
           end
@@ -21,3 +28,4 @@ module ActiveAdmin
     end
   end
 end
+
