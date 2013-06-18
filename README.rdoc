@@ -11,6 +11,9 @@ both sortable via drag'n'drop.
     gem "activeadmin-sortable-tree", :github => "nebirhos/activeadmin-sortable-tree", :branch => "master"
 
 
+*WARNING!* Not compatible with neo/activeadmin-sortable[https://github.com/neo/activeadmin-sortable]
+
+
 == Usage (Tree)
 
 * Admin (eg. app/admin/page.rb):
