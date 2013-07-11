@@ -11,7 +11,7 @@ module ActiveAdmin
           sort_url = if (( sort_url_block = active_admin_config.dsl.sortable_options[:sort_url] ))
                        sort_url_block.call(self)
                      else
-                       url_for([:sort, ActiveAdmin.default_namespace, resource_name.pluralize])
+                       url_for([:sort, ActiveAdmin.application.default_namespace, resource_name.pluralize])
                      end
 
           set_attribute "data-sortable-url", sort_url
