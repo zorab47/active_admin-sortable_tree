@@ -14,7 +14,7 @@ module ActiveAdmin
         @collection.sort_by! do |a|
           a.send(@options[:sorting_attribute]) || 1
         end
-        @resource_name = active_admin_config.resource_name.to_s.parameterize.underscore
+        @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
         # Call the block passed in. This will set the
         # title and body methods
