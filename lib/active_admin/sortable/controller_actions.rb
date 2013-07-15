@@ -19,7 +19,7 @@ module ActiveAdmin::Sortable
       config.paginate = false
 
       collection_action :sort, :method => :post do
-        resource_name = active_admin_config.resource_name.underscored_resource_name
+        resource_name = active_admin_config.resource_name.parameterize.underscore
 
         records = params[resource_name].inject({}) do |res, (resource, parent_resource)|
           res[resource_class.find(resource)] = resource_class.find(parent_resource) rescue nil
