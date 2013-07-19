@@ -10,6 +10,11 @@ body.active_admin
     .ui-sortable > *
       cursor: move
 
+  .disclose
+    cursor: pointer
+    width: 10px
+    display: none
+
   .index_as_sortable
     .resource_selection_toggle_panel
       padding-left: 12px
@@ -56,3 +61,19 @@ body.active_admin
 
       > li > ol
         margin-left: 30px
+
+      li.mjs-nestedSortable-collapsed > ol
+        display: none
+
+      li.mjs-nestedSortable-branch > div > .disclose
+        display: block
+        float: left
+        padding: 10px 5px 8px 5px
+
+      li.mjs-nestedSortable-collapsed > div > .disclose > span:before
+        content: '+ '
+
+      li.mjs-nestedSortable-expanded > div > .disclose > span:before 
+        content: '- '
+
+

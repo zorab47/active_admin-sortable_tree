@@ -1,6 +1,9 @@
 #= require jquery.mjs.nestedSortable
 
 $ ->
+  $('.disclose').bind 'click', (event) ->
+    $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded')
+
   $("[data-sortable-type=plain]").each ->
     $this = $(@)
     $this.sortable
@@ -41,6 +44,8 @@ $ ->
       # prevent drag flickers
       tolerance: 'pointer'
       toleranceElement: '> div'
+      isTree: true
+      startCollapsed: true
       update: ->
         $this.nestedSortable("disable")
         $.ajax

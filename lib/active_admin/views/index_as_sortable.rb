@@ -70,6 +70,9 @@ module ActiveAdmin
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
+            span :class => :disclose do
+              span
+            end
             h3 :class => "cell left" do
               call_method_or_proc_on(item, @label)
             end
