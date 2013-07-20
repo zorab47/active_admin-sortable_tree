@@ -48,6 +48,8 @@ both sortable via drag'n'drop.
                parent_method: :parent,
                children_method: :children,
                roots_method: :roots
+               :collapsible => false, #hides +/- buttons
+               :start_collapsed => false, # default is or not collapse all parent
       ...
     end
 
