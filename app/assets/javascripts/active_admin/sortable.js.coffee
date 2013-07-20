@@ -45,7 +45,7 @@ $ ->
       tolerance: 'pointer'
       toleranceElement: '> div'
       isTree: true
-      startCollapsed: true
+      startCollapsed: $this.data("start-collapsed")
       update: ->
         $this.nestedSortable("disable")
         $.ajax

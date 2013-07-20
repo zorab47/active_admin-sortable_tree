@@ -10,7 +10,9 @@ module ActiveAdmin::Sortable
                              :roots_method => :roots,
                              :tree => false,
                              :max_levels => 0,
-                             :protect_root => false
+                             :protect_root => false,
+                             :collapsible => false, #hides +/- buttons
+                             :start_collapsed => false
 
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options
