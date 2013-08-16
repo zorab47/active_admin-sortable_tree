@@ -91,6 +91,15 @@ Currently supports only IndexAsBlock, more to come!
 
 * Model: Same as list view (see above)
 
+== Ajax Callback Config
+
+It exposes three Ajax Events: ajaxDone, ajaxFail and ajaxAlways, which correspond to jQuery ajax callbacks: done, fail and always.
+
+To subscribe Ajax callback:
+
+    ActiveAdminSortableEvent.add('ajaxDone', function (){
+      // do what you want
+    })
 
 == Copyright
 
