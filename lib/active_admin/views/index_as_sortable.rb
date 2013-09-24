@@ -51,7 +51,7 @@ module ActiveAdmin
         sort_url = if (( sort_url_block = @options[:sort_url] ))
                      sort_url_block.call(self)
                    else
-                     url_for([:sort, ActiveAdmin.application.default_namespace, @resource_name.pluralize])
+                     url_for(:action => :sort)
                    end
         data_options = {
           "data-sortable-type" => (tree? ? "tree" : "list"),
