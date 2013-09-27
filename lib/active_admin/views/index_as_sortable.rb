@@ -6,11 +6,7 @@ module ActiveAdmin
       def build(page_presenter, collection)
         @page_presenter = page_presenter
         @options = active_admin_config.dsl.sortable_options
-        @collection = if tree?
-                        resource_class.send(@options[:roots_method])
-                      else
-                        collection
-                      end
+        @collection = collection
         @collection.sort_by! do |a|
           a.send(@options[:sorting_attribute]) || 1
         end
@@ -26,10 +22,6 @@ module ActiveAdmin
 
       def self.index_name; "sortable"; end
 
-      def tree?
-        !!@options[:tree]
-      end
-
       # Setter method for the configuration of the label
       def label(method = nil, &block)
         if block_given? || method
@@ -43,8 +35,11 @@ module ActiveAdmin
         @default_actions = true
       end
 
-
       protected
+
+      def tree?
+        !!@options[:tree]
+      end
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
