@@ -60,7 +60,7 @@
 				var self = this;
 				$(this.items).each(function() {
 					var $li = this.item;
-					if ($li.children(self.options.listType).length) {
+					if ($li.has(self.options.listType + " " + self.options.items).length) {
 						$li.addClass(self.options.branchClass);
 						// expand/collapse class only if they have children
 						if (self.options.startCollapsed) $li.addClass(self.options.collapsedClass);
