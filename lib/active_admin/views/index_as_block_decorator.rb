@@ -5,13 +5,12 @@ module ActiveAdmin
       def build(page_presenter, collection)
         add_class "index"
         if active_admin_config.dsl.sortable_options
-          resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
           set_attribute "data-sortable-type", "plain"
 
           sort_url = if (( sort_url_block = active_admin_config.dsl.sortable_options[:sort_url] ))
                        sort_url_block.call(self)
                      else
-                       url_for([:sort, ActiveAdmin.application.default_namespace, resource_name.pluralize])
+                       url_for(:action => :sort)
                      end
 
           set_attribute "data-sortable-url", sort_url
