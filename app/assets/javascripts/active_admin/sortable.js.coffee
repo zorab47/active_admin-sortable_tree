@@ -1,5 +1,23 @@
 #= require jquery.mjs.nestedSortable
 
+window.ActiveAdminSortableEvent = do ->
+  eventToListeners = {}
+
+  return {
+    add: (event, callback) ->
+      if not eventToListeners.hasOwnProperty(event)
+        eventToListeners[event] = []
+      eventToListeners[event].push(callback)
+
+    trigger: (event, args) ->
+      if eventToListeners.hasOwnProperty(event)
+        for callback in eventToListeners[event]
+          try
+            callback.call(null, args)
+          catch e
+            console.error(e) if console and console.error
+  }
+
 $ ->
   $('.disclose').bind 'click', (event) ->
     $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded')
@@ -16,6 +34,12 @@ $ ->
           data: $this.sortable("serialize")
         .always ->
           $this.sortable("enable")
+          ActiveAdminSortableEvent.trigger('ajaxAlways')
+        .done ->
+          ActiveAdminSortableEvent.trigger('ajaxDone')
+        .fail ->
+          ActiveAdminSortableEvent.trigger('ajaxFail')
+
     .disableSelection()
 
   $(".index_as_sortable [data-sortable-type]").each ->
@@ -59,3 +83,8 @@ $ ->
             else
               $(this).removeClass('even').addClass('odd')
           $this.nestedSortable("enable")
+          ActiveAdminSortableEvent.trigger('ajaxAlways')
+        .done ->
+          ActiveAdminSortableEvent.trigger('ajaxDone')
+        .fail ->
+          ActiveAdminSortableEvent.trigger('ajaxFail')
