@@ -6,7 +6,7 @@ module ActiveAdmin
       def build(page_presenter, collection)
         @page_presenter = page_presenter
         @options = active_admin_config.dsl.sortable_options
-        @collection = if @options[:tree]
+        @collection = if tree?
                         resource_class.send(@options[:roots_method])
                       else
                         collection
@@ -25,6 +25,10 @@ module ActiveAdmin
       end
 
       def self.index_name; "sortable"; end
+
+      def tree?
+        !!@options[:tree]
+      end
 
       # Setter method for the configuration of the label
       def label(method = nil, &block)
@@ -47,10 +51,10 @@ module ActiveAdmin
         sort_url = if (( sort_url_block = @options[:sort_url] ))
                      sort_url_block.call(self)
                    else
-                     url_for([:sort, ActiveAdmin.application.default_namespace, @resource_name.pluralize])
+                     url_for(:action => :sort)
                    end
         data_options = {
-          "data-sortable-type" => (@options[:tree] ? "tree" : "list"),
+          "data-sortable-type" => (tree? ? "tree" : "list"),
           "data-sortable-url" => sort_url,
         }
         data_options["data-max-levels"] = @options[:max_levels]
@@ -88,7 +92,7 @@ module ActiveAdmin
             item.send(@options[:children_method]).order(@options[:sorting_attribute]).each do |c|
               build_nested_item(c)
             end
-          end if @options[:tree]
+          end if tree?
         end
       end
 
