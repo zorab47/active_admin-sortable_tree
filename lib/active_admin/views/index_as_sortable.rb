@@ -6,7 +6,7 @@ module ActiveAdmin
       def build(page_presenter, collection)
         @page_presenter = page_presenter
         @collection = if tree?
-                        resource_class.send(options[:roots_method])
+                        roots
                       else
                         collection
                       end
@@ -27,6 +27,34 @@ module ActiveAdmin
 
       def options
         active_admin_config.dsl.sortable_options
+      end
+
+      def roots
+        roots_collection || default_roots_collection
+      end
+
+      # Find the roots by calling the roots method directly on the resource.
+      # This effectively performs:
+      #
+      #     TreeNode.roots # => [#<TreeNode id:1>, ... ]
+      #
+      # Returns collection of roots.
+      def default_roots_collection
+        resource_class.send(options[:roots_method])
+      end
+
+      # Use user-defined logic to find the root nodes. This executes a callable
+      # object within the context of the resource's controller.
+      #
+      # Example
+      #
+      #     options[:roots_collection] = proc { current_user.tree_nodes.roots }
+      #
+      # Returns collection of roots.
+      def roots_collection
+        if (callable = options[:roots_collection])
+          controller.instance_exec(&callable)
+        end
       end
 
       def tree?
@@ -80,7 +108,7 @@ module ActiveAdmin
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
-            
+
             span :class => :disclose do
               span
             end if options[:collapsible]
