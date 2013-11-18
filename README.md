@@ -48,11 +48,16 @@ ActiveAdmin.register Page do
            sorting_attribute: :position,
            parent_method: :parent,
            children_method: :children,
-           roots_method: :roots
-  ...
+           roots_method: :roots,
+           roots_collection: proc { current_user.pages.roots }
+  # ...
 end
 ```
 
+The option `roots_collection` provides full control on how to find the root
+nodes of your sortable tree and is evaluated within the context of the
+controller. Please note that `roots_collection` will override what is specified
+in `roots_method`.
 
 ## Usage (List)
 
@@ -107,14 +112,15 @@ end
 ```ruby
 ActiveAdmin.register Page do
   sortable tree: true,
-           max_levels: 0, # infinite indent levels
-           protect_root: false, # allow root items to be dragged
+           max_levels: 0,               # infinite indent levels
+           protect_root: false,         # allow root items to be dragged
            sorting_attribute: :position,
            parent_method: :parent,
            children_method: :children,
-           roots_method: :roots
-           collapsible: false, # show +/- buttons to collapse children
-           start_collapsed: false, # when collapsible, start with all roots collapsed
+           roots_method: :roots,
+           roots_collection: nil,       # proc to specifiy retrieval of roots
+           collapsible: false,          # show +/- buttons to collapse children
+           start_collapsed: false,      # when collapsible, start with all roots collapsed
 end
 ```
 
