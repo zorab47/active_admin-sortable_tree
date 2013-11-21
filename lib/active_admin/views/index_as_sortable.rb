@@ -5,14 +5,13 @@ module ActiveAdmin
     class IndexAsSortable < ActiveAdmin::Component
       def build(page_presenter, collection)
         @page_presenter = page_presenter
-        @options = active_admin_config.dsl.sortable_options
         @collection = if tree?
-                        resource_class.send(@options[:roots_method])
+                        roots
                       else
                         collection
                       end
         @collection.sort_by! do |a|
-          a.send(@options[:sorting_attribute]) || 1
+          a.send(options[:sorting_attribute]) || 1
         end
         @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
@@ -26,8 +25,40 @@ module ActiveAdmin
 
       def self.index_name; "sortable"; end
 
+      def options
+        active_admin_config.dsl.sortable_options
+      end
+
+      def roots
+        roots_collection || default_roots_collection
+      end
+
+      # Find the roots by calling the roots method directly on the resource.
+      # This effectively performs:
+      #
+      #     TreeNode.roots # => [#<TreeNode id:1>, ... ]
+      #
+      # Returns collection of roots.
+      def default_roots_collection
+        resource_class.send(options[:roots_method])
+      end
+
+      # Use user-defined logic to find the root nodes. This executes a callable
+      # object within the context of the resource's controller.
+      #
+      # Example
+      #
+      #     options[:roots_collection] = proc { current_user.tree_nodes.roots }
+      #
+      # Returns collection of roots.
+      def roots_collection
+        if (callable = options[:roots_collection])
+          controller.instance_exec(&callable)
+        end
+      end
+
       def tree?
-        !!@options[:tree]
+        !!options[:tree]
       end
 
       # Setter method for the configuration of the label
@@ -50,7 +81,7 @@ module ActiveAdmin
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
-        sort_url = if (( sort_url_block = @options[:sort_url] ))
+        sort_url = if (( sort_url_block = options[:sort_url] ))
                      sort_url_block.call(self)
                    else
                      url_for(:action => :sort)
@@ -59,9 +90,9 @@ module ActiveAdmin
           "data-sortable-type" => (tree? ? "tree" : "list"),
           "data-sortable-url" => sort_url,
         }
-        data_options["data-max-levels"] = @options[:max_levels]
-        data_options["data-start-collapsed"] = @options[:start_collapsed]
-        data_options["data-protect-root"] = true if @options[:protect_root]
+        data_options["data-max-levels"] = options[:max_levels]
+        data_options["data-start-collapsed"] = options[:start_collapsed]
+        data_options["data-protect-root"] = true if options[:protect_root]
 
         ol data_options do
           @collection.each do |item|
@@ -77,10 +108,10 @@ module ActiveAdmin
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
-            
+
             span :class => :disclose do
               span
-            end if @options[:collapsible]
+            end if options[:collapsible]
 
             h3 :class => "cell left" do
               call_method_or_proc_on(item, @label)
@@ -91,7 +122,7 @@ module ActiveAdmin
           end
 
           ol do
-            item.send(@options[:children_method]).order(@options[:sorting_attribute]).each do |c|
+            item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
               build_nested_item(c)
             end
           end if tree?
