@@ -1,4 +1,8 @@
-# desc "Explaining what the task does"
-# task :activeadmin-tree do
-#   # Task goes here
-# end
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs << "spec"
+  t.pattern = "spec/**/*_spec.rb"
+end
+
+task :default => :test
