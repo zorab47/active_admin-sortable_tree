@@ -46,6 +46,7 @@ You can configure these methods if you need:
 ActiveAdmin.register Page do
   sortable tree: true,
            sorting_attribute: :position,
+           ordering_attribute: :nil,
            parent_method: :parent,
            children_method: :children,
            roots_method: :roots,
@@ -53,6 +54,9 @@ ActiveAdmin.register Page do
   # ...
 end
 ```
+
+The option `ordering_attribute` is used if given to execute an Array#order
+for the nested items. Defaults to `sorting_attribute` if none is given.
 
 The option `roots_collection` provides full control on how to find the root
 nodes of your sortable tree and is evaluated within the context of the
