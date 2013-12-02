@@ -11,7 +11,7 @@ module ActiveAdmin
                         collection
                       end
         @collection.sort_by! do |a|
-          a.send(options[:sorting_attribute]) || 1
+          a.send(options[:ordering_attribute] || options[:sorting_attribute]) || 1
         end
         @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
