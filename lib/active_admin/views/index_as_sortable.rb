@@ -122,7 +122,8 @@ module ActiveAdmin
           end
 
           ol do
-            item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
+            order_by = options[:ordering_attribute] || options[:sorting_attribute]            
+            item.send(options[:children_method]).order(order_by).each do |c|
               build_nested_item(c)
             end
           end if tree?
