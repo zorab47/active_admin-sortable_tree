@@ -63,8 +63,10 @@
 					if ($li.children(self.options.listType).length) {
 						$li.addClass(self.options.branchClass);
 						// expand/collapse class only if they have children
-						if (self.options.startCollapsed) $li.addClass(self.options.collapsedClass);
-						else $li.addClass(self.options.expandedClass);
+						if ($li.find('li').length > 0) {
+							if (self.options.startCollapsed) $li.addClass(self.options.collapsedClass);
+							else $li.addClass(self.options.expandedClass);
+						}
 					} else {
 						$li.addClass(self.options.leafClass);
 					}
