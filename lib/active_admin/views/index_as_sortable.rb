@@ -11,7 +11,7 @@ module ActiveAdmin
                         collection
                       end
         @collection.sort_by! do |a|
-          a.send(options[:sorting_attribute]) || 1
+          a.send(options[:ordering_attribute] || options[:sorting_attribute]) || 1
         end
         @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
@@ -124,7 +124,8 @@ module ActiveAdmin
           end
 
           ol do
-            item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
+            order_by = options[:ordering_attribute] || options[:sorting_attribute]            
+            item.send(options[:children_method]).order(order_by).each do |c|
               build_nested_item(c)
             end
           end if tree?

@@ -5,6 +5,7 @@ module ActiveAdmin::Sortable
 
     def sortable(options = {})
       options.reverse_merge! :sorting_attribute => :position,
+                             :ordering_attribute => nil,
                              :parent_method => :parent,
                              :children_method => :children,
                              :roots_method => :roots,
