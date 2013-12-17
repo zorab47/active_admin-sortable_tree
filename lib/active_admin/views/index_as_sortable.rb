@@ -109,10 +109,10 @@ module ActiveAdmin
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
 
-            if item.send(options[:children_method]).order(options[:sorting_attribute]).any?
+            if options[:collapsible] && item.send(options[:children_method]).any?
               span :class => :disclose do
                 span
-              end if options[:collapsible]
+              end
             end
 
             h3 :class => "cell left" do
