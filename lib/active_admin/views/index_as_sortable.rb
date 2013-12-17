@@ -109,9 +109,11 @@ module ActiveAdmin
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
 
-            span :class => :disclose do
-              span
-            end if options[:collapsible]
+            if options[:collapsible] && item.send(options[:children_method]).any?
+              span :class => :disclose do
+                span
+              end
+            end
 
             h3 :class => "cell left" do
               call_method_or_proc_on(item, @label)
