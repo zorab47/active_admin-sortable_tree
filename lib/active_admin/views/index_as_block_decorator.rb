@@ -14,7 +14,7 @@ module ActiveAdmin
                      end
 
           set_attribute "data-sortable-url", sort_url
-          collection.sort_by! do |a|
+          collection = collection.sort_by do |a|
             a.send(active_admin_config.dsl.sortable_options[:sorting_attribute]) || 1
           end
         end
