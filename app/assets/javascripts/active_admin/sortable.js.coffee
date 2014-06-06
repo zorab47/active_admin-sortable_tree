@@ -30,6 +30,7 @@ $ ->
       update: ->
         $this.sortable("disable")
         $.ajax
+          headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
           url: $this.data("sortable-url")
           type: "post"
           data: $this.sortable("serialize")
