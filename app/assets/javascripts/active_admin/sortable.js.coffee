@@ -1,4 +1,8 @@
+<% if Gem.loaded_specs["jquery-ui-rails"].version >= Gem::Version.create("5.0.0") %>
+#= require jquery-ui/sortable
+<% else %>
 #= require jquery.ui.sortable
+<% end %>
 #= require jquery.mjs.nestedSortable
 
 window.ActiveAdminSortableEvent = do ->
