@@ -28,14 +28,14 @@ RSpec::Core::RakeTask.new(:spec)
 task default: ['dummy:prepare', :spec]
 
 require 'rake/clean'
-CLEAN << FileList['spec/dummy/db/*sqlite', 'spec/dummy/log/*', 'spec/dummy/public/assets/*', 'spec/dummy/tmp/**/*']
+CLEAN.include 'spec/dummy/db/*sqlite3', 'spec/dummy/log/*', 'spec/dummy/public/assets/*', 'spec/dummy/tmp/**/*'
 
 namespace :dummy do
   desc 'Setup dummy app database'
   task :prepare do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile', dummy_path)
-    command = "rake -f '%s' db:test:prepare" % rakefile
+    command = "rake -f '%s' db:schema:load RAILS_ENV=test" % rakefile
     sh(command) unless ENV["DISABLE_CREATE"]
   end
 
