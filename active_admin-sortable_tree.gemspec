@@ -7,14 +7,16 @@ require "active_admin/sortable_tree/version"
 Gem::Specification.new do |s|
   s.name        = "active_admin-sortable_tree"
   s.version     = ActiveAdmin::SortableTree::VERSION
-  s.authors     = ["Francesco Disperati"]
-  s.email       = ["me@nebirhos.com"]
+  s.authors     = ["Francesco Disperati", 'Charles Maresh']
+  s.email       = ["me@nebirhos.com", 'zorab47@gmail.com']
   s.homepage    = "https://github.com/zorab47/active_admin-sortable_tree"
-  s.summary     = "Show ActiveAdmin index as a nested tree, with drag'n'drop"
-  s.description = "Show ActiveAdmin index as a nested tree, with drag'n'drop"
+  s.summary     = "Add drag and drop sorting to ActiveAdmin resources"
+  s.description = "SortableTree provides sorting of lists and hierarchies from ActiveAdmin index views."
+  s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.test_files = Dir["spec/**/*"]
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.require_paths = ["lib"]
 
   s.add_dependency 'rails', '>= 3.2'
   s.add_dependency 'activeadmin', '>= 0.6'
