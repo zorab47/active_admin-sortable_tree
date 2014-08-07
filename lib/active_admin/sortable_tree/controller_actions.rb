@@ -1,4 +1,4 @@
-module ActiveAdmin::Sortable
+module ActiveAdmin::SortableTree
   module ControllerActions
 
     attr_accessor :sortable_options
