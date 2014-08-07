@@ -1,15 +1,17 @@
-# ActiveAdmin Sortable Tree
+# ActiveAdmin::SortableTree
 
-This gem adds a tree and a list view to your ActiveAdmin resource index, both sortable via drag'n'drop.
+[![Build Status](https://travis-ci.org/zorab47/active_admin-sortable_tree.svg?branch=master)](https://travis-ci.org/zorab47/active_admin-sortable_tree)
+
+This gem adds a tree and a list view to your ActiveAdmin resource index, both
+sortable via drag'n'drop.
 
 
 ## Installation
 
 ```ruby
 # Gemfile
-gem "activeadmin-sortable-tree", :github => "nebirhos/activeadmin-sortable-tree", :branch => "master"
+gem "active_admin-sortable_tree"
 ```
-
 
 *WARNING!* Not compatible with neo/activeadmin-sortable[https://github.com/neo/activeadmin-sortable]
 
@@ -30,8 +32,10 @@ ActiveAdmin.register Page do
 end
 ```
 
-**Model**: activeadmin-sortable-tree is agnostic to the tree implementation. All you have to do is expose a sorting attribute and a few tree methods (:parent, :children and :roots).
-Let's say you use [Ancestry](https://github.com/stefankroes/ancestry):
+**Model**: activeadmin-sortable-tree is agnostic to the tree implementation. All
+you have to do is expose a sorting attribute and a few tree methods (:parent,
+:children and :roots).  Let's say you use
+[Ancestry](https://github.com/stefankroes/ancestry):
 
 ```ruby
 class Page < ActiveRecord::Base
@@ -74,7 +78,8 @@ ActiveAdmin.register Page do
 end
 ```
 
-**Model**: Sortable list assumes you have a `:position` field in your resource. Of course it's configurable:
+**Model**: Sortable list assumes you have a `:position` field in your resource.
+Of course it's configurable:
 
 ```ruby
 ActiveAdmin.register Page do
@@ -140,7 +145,8 @@ end
 
 ### Ajax Callback Config
 
-It exposes three Ajax Events: ajaxDone, ajaxFail and ajaxAlways, which correspond to jQuery ajax callbacks: done, fail and always.
+It exposes three Ajax Events: ajaxDone, ajaxFail and ajaxAlways, which
+correspond to jQuery ajax callbacks: done, fail and always.
 
 To subscribe Ajax callback:
 
@@ -152,5 +158,6 @@ ActiveAdminSortableEvent.add('ajaxDone', function (){
 
 ## Copyright
 
-Copyright © 2013 Francesco Disperati, Cantiere Creativo. See the file MIT-LICENSE for details.
-See the full list list of [contributors](https://github.com/nebirhos/activeadmin-sortable-tree/graphs/contributors).
+Copyright © 2013 Francesco Disperati, Cantiere Creativo. See the file
+MIT-LICENSE for details. See the full list list of
+[contributors](https://github.com/nebirhos/activeadmin-sortable-tree/graphs/contributors).
