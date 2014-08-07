@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
-  include ActionController::RecordIdentifier
-
   context "configured as sortable" do
     it "sorts by dragging vertically", js: true do
       bottom = Category.create! name: "bottom", position: 0
@@ -13,8 +11,8 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
 
       expect(all(".ui-sortable li h3").map(&:text)).to eq(["bottom", "top", "middle"])
 
-      wait_for_ajax { drag_element("##{dom_id middle} h3", dy: -100) }
-      wait_for_ajax { drag_element("##{dom_id top} h3", dy: -100) }
+      wait_for_ajax { drag_element("#category_#{middle.id} h3", dy: -100) }
+      wait_for_ajax { drag_element("#category_#{top.id} h3", dy: -100) }
 
       expect(all(".ui-sortable li h3").map(&:text)).to eq(["top", "middle", "bottom"])
       expect(Category.order(:position).map(&:name)).to eq(["top", "middle", "bottom"])
