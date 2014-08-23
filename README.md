@@ -162,4 +162,4 @@ ActiveAdminSortableEvent.add('ajaxDone', function (){
 
 Copyright © 2013 Francesco Disperati, Cantiere Creativo. See the file
 MIT-LICENSE for details. See the full list list of
-[contributors](/graphs/contributors).
+[contributors](http://github.com/zorab47/active_admin-sortable_tree/graphs/contributors).
