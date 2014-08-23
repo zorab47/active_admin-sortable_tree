@@ -1,14 +1,12 @@
 # ActiveAdmin::SortableTree
 
-[![Gem Version](https://badge.fury.io/rb/active_admin-sortable_tree.svg)](http://badge.fury.io/rb/active_admin-sortable_tree) [![Build Status](https://travis-ci.org/zorab47/active_admin-sortable_tree.svg?branch=master)](https://travis-ci.org/zorab47/active_admin-sortable_tree)
+[![Gem Version](https://badge.fury.io/rb/active_admin-sortable_tree.svg)](http://badge.fury.io/rb/active_admin-sortable_tree)
+[![Build Status](https://travis-ci.org/zorab47/active_admin-sortable_tree.svg?branch=master)](https://travis-ci.org/zorab47/active_admin-sortable_tree)
 
 This gem adds a tree and a list view to your ActiveAdmin resource index, both
 sortable via drag'n'drop.
 
-### :warning: Unmaintained :warning:
-
-Sorry, but I no longer work on ActiveAdmin often enough to justify mantaining this gem. Take it as it is. If you are interested to update and maintain the gem, please let me know! :heart:
-
+![Sortable Tree Demo](http://zorab47.github.io/active_admin-sortable_tree/images/sortable_tree.gif)
 
 ## Installation
 
@@ -16,9 +14,6 @@ Sorry, but I no longer work on ActiveAdmin often enough to justify mantaining th
 # Gemfile
 gem "active_admin-sortable_tree"
 ```
-
-*WARNING!* Not compatible with neo/activeadmin-sortable[https://github.com/neo/activeadmin-sortable]
-
 
 ## Usage (Tree)
 
@@ -36,9 +31,9 @@ ActiveAdmin.register Page do
 end
 ```
 
-**Model**: activeadmin-sortable-tree is agnostic to the tree implementation. All
-you have to do is expose a sorting attribute and a few tree methods (:parent,
-:children and :roots).  Let's say you use
+**Model**: ActiveAdmin::SortableTree is agnostic to the tree implementation. All
+you have to do is expose a sorting attribute and a few tree methods (`:parent`,
+`:children` and `:roots`).  Let's say you use
 [Ancestry](https://github.com/stefankroes/ancestry):
 
 ```ruby
@@ -58,7 +53,7 @@ ActiveAdmin.register Page do
            children_method: :children,
            roots_method: :roots,
            roots_collection: proc { current_user.pages.roots }
-  # ...
+  # …
 end
 ```
 
@@ -70,6 +65,7 @@ in `roots_method`.
 ## Usage (List)
 
 **Admin**:
+
 ```ruby
 # app/admin/page.rb
 ActiveAdmin.register Page do
@@ -89,7 +85,7 @@ Of course it's configurable:
 ActiveAdmin.register Page do
   sortable tree: false, # default
            sorting_attribute: :my_position_field
-  ...
+  # …
 end
 ```
 
@@ -101,7 +97,6 @@ Currently supports only IndexAsBlock, more to come!
 **Admin**:
 ```ruby
 # app/admin/page.rb
-
 ActiveAdmin.register Page do
   sortable
 
@@ -112,7 +107,6 @@ end
 ```
 
 **Model**: Same as list view (see above)
-
 
 ## Customization
 
@@ -160,8 +154,12 @@ ActiveAdminSortableEvent.add('ajaxDone', function (){
 })
 ```
 
+## Alternatives
+
+- [Active Admin Sortable](https://github.com/neo/activeadmin-sortable)
+
 ## Copyright
 
 Copyright © 2013 Francesco Disperati, Cantiere Creativo. See the file
 MIT-LICENSE for details. See the full list list of
-[contributors](https://github.com/nebirhos/activeadmin-sortable-tree/graphs/contributors).
+[contributors](/graphs/contributors).
