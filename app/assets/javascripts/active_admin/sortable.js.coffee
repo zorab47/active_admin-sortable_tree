@@ -52,6 +52,8 @@ $ ->
       max_levels = 1
       tab_hack = 99999
 
+    cancel_selector = "div.item.nosort" if $this.data('disable-sorting')
+
     $this.nestedSortable
       forcePlaceholderSize: true
       forceHelperSizeType: true
@@ -89,3 +91,4 @@ $ ->
           ActiveAdminSortableEvent.trigger('ajaxDone')
         .fail ->
           ActiveAdminSortableEvent.trigger('ajaxFail')
+      cancel: cancel_selector
