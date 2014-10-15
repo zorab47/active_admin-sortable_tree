@@ -122,6 +122,7 @@ ActiveAdmin.register Page do
            children_method: :children,
            roots_method: :roots,
            roots_collection: nil,       # proc to specifiy retrieval of roots
+           sortable: true,              # Disable sorting (use only 'tree' functionality)
            collapsible: false,          # show +/- buttons to collapse children
            start_collapsed: false,      # when collapsible, start with all roots collapsed
 end
