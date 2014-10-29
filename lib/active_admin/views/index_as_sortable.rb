@@ -76,37 +76,43 @@ module ActiveAdmin
         @other_actions = block
       end
 
-
       protected
 
       def build_list
         resource_selection_toggle_panel if active_admin_config.batch_actions.any?
-        sort_url = if (( sort_url_block = options[:sort_url] ))
-                     sort_url_block.call(self)
-                   else
-                     url_for(:action => :sort)
-                   end
-        data_options = {
-          "data-sortable-type" => (tree? ? "tree" : "list"),
-          "data-sortable-url" => sort_url,
-        }
-        data_options["data-max-levels"] = options[:max_levels]
-        data_options["data-start-collapsed"] = options[:start_collapsed]
-        data_options["data-protect-root"] = true if options[:protect_root]
-        data_options["data-disable-sorting"] = true if !options[:sortable]
 
-        ol data_options do
+        ol sortable_data_options do
           @collection.each do |item|
             build_nested_item(item)
           end
         end
       end
 
+      def sortable_data_options
+        return {} if !sortable?
+
+        sort_url = if (( sort_url_block = options[:sort_url] ))
+                     sort_url_block.call(self)
+                   else
+                     url_for(:action => :sort)
+                   end
+        {
+          "data-sortable-type"   => tree? ? "tree" : "list",
+          "data-sortable-url"    => sort_url,
+          "data-max-levels"      => options[:max_levels],
+          "data-start-collapsed" => options[:start_collapsed],
+          "data-protect-root"    => options[:protect_root],
+        }
+      end
+
+      def sortable?
+        options[:sortable]
+      end
+
       def build_nested_item(item)
-        nosort_class = "nosort" if !options[:sortable]
         li :id => "#{@resource_name}_#{item.id}" do
 
-          div :class => "item " << cycle("odd", "even", :name => "list_class") << " #{nosort_class}" do
+          div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end

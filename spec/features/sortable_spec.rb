@@ -17,6 +17,24 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
       expect(all(".ui-sortable li h3").map(&:text)).to eq(["top", "middle", "bottom"])
       expect(Category.order(:position).map(&:name)).to eq(["top", "middle", "bottom"])
     end
+
+    context "with option `sortable: false`" do
+      before do
+        sortable_options_for("Category")[:sortable] = false
+      end
+
+      it "disables sorting by excluding sortable data attributes" do
+        bottom = Category.create! name: "bottom", position: 0
+        top    = Category.create! name: "top",    position: 1
+        middle = Category.create! name: "middle", position: 2
+
+        visit admin_categories_path
+
+        expect(page).to have_css(".index_as_sortable")
+        expect(page).not_to have_css("[data-sortable-type]")
+        expect(page).not_to have_css("[data-sortable-url]")
+      end
+    end
   end
 
   context "configured as sortable tree" do
@@ -49,10 +67,33 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
 
       expect(top.children).to include(middle, bottom)
     end
+
+    context "with option `sortable: false`" do
+      before do
+        sortable_options_for("CategoryTree")[:sortable] = false
+      end
+
+      it "disables sorting by excluding sortable data attributes" do
+        bottom = Category.create! name: "bottom", position: 0
+        top    = Category.create! name: "top",    position: 1
+        middle = Category.create! name: "middle", position: 2
+
+        visit admin_category_trees_path
+
+        expect(page).to have_css(".index_as_sortable")
+        expect(page).not_to have_css("[data-sortable-type]")
+        expect(page).not_to have_css("[data-sortable-url]")
+      end
+    end
   end
 
   def drag_element(selector, options)
     options.reverse_merge! moves: 20
     page.execute_script(%Q($("#{selector}").simulate("drag", #{options.to_json} )))
+  end
+
+  def sortable_options_for(resource)
+    resource_config = ActiveAdmin.application.namespace(:admin).resource_for(resource)
+    resource_config.dsl.sortable_options
   end
 end

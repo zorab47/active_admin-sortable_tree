@@ -23,36 +23,15 @@ $ ->
   $('.disclose').bind 'click', (event) ->
     $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded')
 
-  $("[data-sortable-type=plain]").each ->
-    $this = $(@)
-    $this.sortable
-      revert: 250
-      update: ->
-        $this.sortable("disable")
-        $.ajax
-          url: $this.data("sortable-url")
-          type: "post"
-          data: $this.sortable("serialize")
-        .always ->
-          $this.sortable("enable")
-          ActiveAdminSortableEvent.trigger('ajaxAlways')
-        .done ->
-          ActiveAdminSortableEvent.trigger('ajaxDone')
-        .fail ->
-          ActiveAdminSortableEvent.trigger('ajaxFail')
-
-    .disableSelection()
-
   $(".index_as_sortable [data-sortable-type]").each ->
     $this = $(@)
+
     if $this.data('sortable-type') == "tree"
       max_levels = $this.data('max-levels')
       tab_hack = 20 # nestedSortable default
     else
       max_levels = 1
       tab_hack = 99999
-
-    cancel_selector = "div.item.nosort" if $this.data('disable-sorting')
 
     $this.nestedSortable
       forcePlaceholderSize: true
@@ -91,4 +70,3 @@ $ ->
           ActiveAdminSortableEvent.trigger('ajaxDone')
         .fail ->
           ActiveAdminSortableEvent.trigger('ajaxFail')
-      cancel: cancel_selector
