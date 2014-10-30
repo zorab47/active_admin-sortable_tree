@@ -106,7 +106,11 @@ module ActiveAdmin
       end
 
       def sortable?
-        options[:sortable]
+        if (sortable = options[:sortable]).respond_to? :call
+          controller.instance_exec(&sortable)
+        else
+          sortable
+        end
       end
 
       def build_nested_item(item)

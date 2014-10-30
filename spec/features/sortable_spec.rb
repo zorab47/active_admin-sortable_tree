@@ -35,6 +35,26 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
         expect(page).not_to have_css("[data-sortable-url]")
       end
     end
+
+    context "with a proc returning false as sortable option" do
+      it "disables sorting" do
+
+        proc_evaluated_within_controller = false
+
+        sortable_options_for("Category")[:sortable] = proc do
+          proc_evaluated_within_controller = self.is_a?(ActiveAdmin::ResourceController)
+          false
+        end
+
+        bottom = Category.create! name: "bottom", position: 0
+
+        visit admin_categories_path
+
+        expect(page).to have_css(".index_as_sortable")
+        expect(page).not_to have_css("[data-sortable-type]")
+        expect(proc_evaluated_within_controller).to be true
+      end
+    end
   end
 
   context "configured as sortable tree" do
