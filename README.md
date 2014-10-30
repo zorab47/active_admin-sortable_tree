@@ -48,6 +48,7 @@ You can configure these methods if you need:
 ```ruby
 ActiveAdmin.register Page do
   sortable tree: true,
+           sortable: true,
            sorting_attribute: :position,
            parent_method: :parent,
            children_method: :children,
@@ -115,6 +116,7 @@ end
 ```ruby
 ActiveAdmin.register Page do
   sortable tree: true,
+           sortable: true,              # disable sorting (accepts a proc)
            max_levels: 0,               # infinite indent levels
            protect_root: false,         # allow root items to be dragged
            sorting_attribute: :position,
