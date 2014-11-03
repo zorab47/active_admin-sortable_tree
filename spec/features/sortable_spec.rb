@@ -17,44 +17,6 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
       expect(all(".ui-sortable li h3").map(&:text)).to eq(["top", "middle", "bottom"])
       expect(Category.order(:position).map(&:name)).to eq(["top", "middle", "bottom"])
     end
-
-    context "with option `sortable: false`" do
-      before do
-        sortable_options_for("Category")[:sortable] = false
-      end
-
-      it "disables sorting by excluding sortable data attributes" do
-        bottom = Category.create! name: "bottom", position: 0
-        top    = Category.create! name: "top",    position: 1
-        middle = Category.create! name: "middle", position: 2
-
-        visit admin_categories_path
-
-        expect(page).to have_css(".index_as_sortable")
-        expect(page).not_to have_css("[data-sortable-type]")
-        expect(page).not_to have_css("[data-sortable-url]")
-      end
-    end
-
-    context "with a proc returning false as sortable option" do
-      it "disables sorting" do
-
-        proc_evaluated_within_controller = false
-
-        sortable_options_for("Category")[:sortable] = proc do
-          proc_evaluated_within_controller = self.is_a?(ActiveAdmin::ResourceController)
-          false
-        end
-
-        bottom = Category.create! name: "bottom", position: 0
-
-        visit admin_categories_path
-
-        expect(page).to have_css(".index_as_sortable")
-        expect(page).not_to have_css("[data-sortable-type]")
-        expect(proc_evaluated_within_controller).to be true
-      end
-    end
   end
 
   context "configured as sortable tree" do
@@ -87,22 +49,37 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
 
       expect(top.children).to include(middle, bottom)
     end
+  end
 
-    context "with option `sortable: false`" do
-      before do
-        sortable_options_for("CategoryTree")[:sortable] = false
-      end
+  context "with option `sortable: false`" do
+    it "disables sorting by excluding sortable data attributes" do
+      bottom = Category.create! name: "bottom", position: 0
+      top    = Category.create! name: "top",    position: 1
+      middle = Category.create! name: "middle", position: 2
 
-      it "disables sorting by excluding sortable data attributes" do
+      visit admin_category_disabled_sorts_path
+
+      expect(page).to have_css(".index_as_sortable")
+      expect(page).not_to have_css("[data-sortable-type]")
+      expect(page).not_to have_css("[data-sortable-url]")
+    end
+
+    context "with a proc returning false as sortable option" do
+      it "disables sorting" do
+        proc_evaluated_within_controller = false
+
+        sortable_options_for("CategoryDisabledSort")[:sortable] = proc do
+          proc_evaluated_within_controller = self.is_a?(ActiveAdmin::ResourceController)
+          false
+        end
+
         bottom = Category.create! name: "bottom", position: 0
-        top    = Category.create! name: "top",    position: 1
-        middle = Category.create! name: "middle", position: 2
 
-        visit admin_category_trees_path
+        visit admin_category_disabled_sorts_path
 
         expect(page).to have_css(".index_as_sortable")
         expect(page).not_to have_css("[data-sortable-type]")
-        expect(page).not_to have_css("[data-sortable-url]")
+        expect(proc_evaluated_within_controller).to be true
       end
     end
   end
