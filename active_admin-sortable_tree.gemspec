@@ -14,12 +14,10 @@ Gem::Specification.new do |s|
   s.description = "SortableTree provides sorting of lists and hierarchies from ActiveAdmin index views."
   s.license     = "MIT"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.require_paths = ["lib"]
+  s.files       = `git ls-files app lib vendor`.split($\) + ["Changelog.md", "README.md", "MIT-LICENSE"]
 
-  s.add_dependency 'rails', '>= 3.2'
-  s.add_dependency 'activeadmin', '>= 0.6'
+  s.add_dependency 'rails',           '>= 3.2'
+  s.add_dependency 'activeadmin',     '>= 0.6'
   s.add_dependency 'jquery-ui-rails', '~> 5.0'
 
   s.add_development_dependency 'capybara'
