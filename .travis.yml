@@ -1,9 +1,18 @@
 language: ruby
+
 rvm:
-  - "1.9.3"
-  - "2.1.2"
+  - 2.1
+  - 2.2
+  - 1.9.3
+
 env:
-  matrix:
-    - RAILS_VERSION=3.2
-    - RAILS_VERSION=4.0
-    - RAILS_VERSION=4.1
+  - RAILS_VERSION=3.2
+  - RAILS_VERSION=4.0
+  - RAILS_VERSION=4.1
+
+matrix:
+  exclude:
+    - rvm: 2.2
+      env: RAILS_VERSION=3.2
+
+sudo: false
