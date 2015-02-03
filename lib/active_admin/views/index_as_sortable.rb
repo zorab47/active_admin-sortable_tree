@@ -94,17 +94,29 @@ module ActiveAdmin
         data_options["data-start-collapsed"] = options[:start_collapsed]
         data_options["data-protect-root"] = true if options[:protect_root]
 
+        sortable = sortable?
+        data_options["data-disable-sorting"] = true if !sortable
+
         ol data_options do
           @collection.each do |item|
-            build_nested_item(item)
+            build_nested_item(item, sortable)
           end
         end
       end
 
-      def build_nested_item(item)
+      def sortable?
+        if options[:sortable].is_a? Proc
+          controller.instance_exec(&options[:sortable])
+        else
+          options[:sortable]
+        end
+      end
+
+      def build_nested_item(item, sortable)
+        nosort_class = "nosort" if !sortable
         li :id => "#{@resource_name}_#{item.id}" do
 
-          div :class => "item " << cycle("odd", "even", :name => "list_class") do
+          div :class => "item " << cycle("odd", "even", :name => "list_class") << " #{nosort_class}" do
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
@@ -125,7 +137,7 @@ module ActiveAdmin
 
           ol do
             item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
-              build_nested_item(c)
+              build_nested_item(c, sortable)
             end
           end if tree?
         end
