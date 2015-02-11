@@ -12,7 +12,11 @@ require 'database_cleaner'
 Capybara.javascript_driver = :poltergeist
 
 def reload_menus!
-  ActiveAdmin.application.namespaces.values.each{|n| n.reset_menu! }
+  if Float(ENV['RAILS_VERSION']) >= 4.0
+    ActiveAdmin.application.namespaces.each { |n| n.reset_menu! }
+  else
+    ActiveAdmin.application.namespaces.values.each { |n| n.reset_menu! }
+  end
 end
 
 def reload_routes!
