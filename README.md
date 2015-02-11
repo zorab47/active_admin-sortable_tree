@@ -1,12 +1,10 @@
 # ActiveAdmin::SortableTree
 
 [![Gem Version](https://badge.fury.io/rb/active_admin-sortable_tree.svg)](http://badge.fury.io/rb/active_admin-sortable_tree)
-[![Build Status](https://travis-ci.org/zorab47/active_admin-sortable_tree.svg?branch=master)](https://travis-ci.org/zorab47/active_admin-sortable_tree)
+[![Build Status](https://travis-ci.org/zorab47/activeadmin-sortable-tree.svg?branch=master)](https://travis-ci.org/zorab47/activeadmin-sortable-tree)
 
 This gem adds a tree and a list view to your ActiveAdmin resource index, both
 sortable via drag'n'drop.
-
-![Sortable Tree Demo](http://zorab47.github.io/active_admin-sortable_tree/images/sortable_tree.gif)
 
 ## Installation
 
