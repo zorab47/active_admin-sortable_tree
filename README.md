@@ -6,6 +6,8 @@
 This gem adds a tree and a list view to your ActiveAdmin resource index, both
 sortable via drag'n'drop.
 
+![ActiveAdmin::SortableTree Example](docs/example.png)
+
 ## Installation
 
 ```ruby
