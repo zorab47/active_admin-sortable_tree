@@ -120,8 +120,7 @@ module ActiveAdmin
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?
             end
-
-            if options[:collapsible] && item.send(options[:children_method]).any?
+            if options[:collapsible] && item.send(options[:children_method]).exists?
               span :class => :disclose do
                 span
               end
