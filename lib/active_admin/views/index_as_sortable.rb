@@ -102,6 +102,8 @@ module ActiveAdmin
           "data-max-levels"      => options[:max_levels],
           "data-start-collapsed" => options[:start_collapsed],
           "data-protect-root"    => options[:protect_root],
+          "data-lazy-url"        => url_for(action: :lazy_load),
+          "data-lazy-enabled"    => lazy_load? ? "true" : "false"
         }
       end
 
@@ -113,8 +115,12 @@ module ActiveAdmin
         end
       end
 
+      def lazy_load?
+        !!options[:lazy]
+      end
+
       def build_nested_item(item)
-        li :id => "#{@resource_name}_#{item.id}" do
+        li :id => "#{@resource_name}_#{item.id}", "data-item-id" => item.id do
 
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
@@ -137,7 +143,7 @@ module ActiveAdmin
           ol do
             item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
               build_nested_item(c)
-            end
+            end unless lazy_load?
           end if tree?
         end
       end

@@ -13,7 +13,8 @@ module ActiveAdmin::SortableTree
                              :protect_root => false,
                              :collapsible => false, #hides +/- buttons
                              :start_collapsed => false,
-                             :sortable => true
+                             :sortable => true,
+                             :lazy => false
 
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options
@@ -45,8 +46,20 @@ module ActiveAdmin::SortableTree
         end
       end
 
+      # action for lazy load
+      collection_action :lazy_load, :method => :post do
+        resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
+        parent_record = resource_class.find(params[:parent_id]) rescue nil
+        records = parent_record.children rescue nil
+        # Bad hook
+        component = {}
+        ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable) { |obj| component = obj }
+        result = records.inject("") do |res, record|
+          res + component.send(:build_nested_item, record)
+        end
+        render text: result.html_safe, status: 200, layout: false
+      end
     end
-
   end
 
   ::ActiveAdmin::ResourceDSL.send(:include, ControllerActions)
