@@ -51,8 +51,8 @@ module ActiveAdmin::SortableTree
         resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
         parent_record = resource_class.find(params[:parent_id]) rescue nil
         records = parent_record.children rescue nil
-        # Bad hook
-        component = ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable).first
+        # bad hook but we need this component to build list with params defined in ActiveAdmin.register block
+        component = ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable).first #
         result = records.inject("") do |res, record|
           res + component.send(:build_nested_item, record)
         end

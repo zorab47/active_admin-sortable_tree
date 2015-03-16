@@ -103,7 +103,7 @@ module ActiveAdmin
           "data-start-collapsed" => options[:start_collapsed],
           "data-protect-root"    => options[:protect_root],
           "data-lazy-url"        => url_for(action: :lazy_load),
-          "data-lazy-enabled"    => lazy_load? ? "true" : "false"
+          "data-lazy-enabled"    => lazy_load?
         }
       end
 
@@ -116,7 +116,7 @@ module ActiveAdmin
       end
 
       def lazy_load?
-        !!options[:lazy]
+        !!options[:lazy] && tree? # works only with tree
       end
 
       def build_nested_item(item)
