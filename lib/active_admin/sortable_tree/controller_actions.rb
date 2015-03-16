@@ -52,8 +52,7 @@ module ActiveAdmin::SortableTree
         parent_record = resource_class.find(params[:parent_id]) rescue nil
         records = parent_record.children rescue nil
         # Bad hook
-        component = {}
-        ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable) { |obj| component = obj }
+        component = ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable).first
         result = records.inject("") do |res, record|
           res + component.send(:build_nested_item, record)
         end
