@@ -81,7 +81,8 @@ $ ->
           ol_element.append(data)
           ol_element.children("li").addClass("mjs-nestedSortable-branch mjs-nestedSortable-collapsed")
           $(".index_as_sortable > ol").nestedSortable("refresh")
-          disclose_click()
+          $(".disclose").unbind "click"
+          disclose_bind()
       .always ->
         el.find(".item").each (index) ->
           if index % 2
@@ -89,11 +90,10 @@ $ ->
           else
             $(this).removeClass("even").addClass("odd")
 
-  disclose_click = ->
-    $(".disclose").unbind "click"
+  disclose_bind = ->
     $(".disclose").bind "click", (event) ->
       $this = $(@)
       lazyLoad($this) if $(".index_as_sortable > ol").data("lazy-enabled")
       $this.closest("li").toggleClass("mjs-nestedSortable-collapsed").toggleClass("mjs-nestedSortable-expanded")
 
-  disclose_click()
+  disclose_bind()
