@@ -23,6 +23,14 @@ module ActiveAdmin
         build_list
       end
 
+      def lazy_build(page_presenter)
+        # Light version of build without @collection and build_list
+        @page_presenter = page_presenter
+        @collection = []
+        @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
+        instance_eval &page_presenter.block if page_presenter.block
+      end
+
       def self.index_name; "sortable"; end
 
       def options
@@ -121,7 +129,6 @@ module ActiveAdmin
 
       def build_nested_item(item)
         li :id => "#{@resource_name}_#{item.id}", "data-item-id" => item.id do
-
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             div :class => "cell left" do
               resource_selection_cell(item) if active_admin_config.batch_actions.any?

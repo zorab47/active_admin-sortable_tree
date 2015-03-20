@@ -48,11 +48,11 @@ module ActiveAdmin::SortableTree
 
       # action for lazy load
       collection_action :lazy_load, :method => :post do
-        resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
-        parent_record = resource_class.find(params[:parent_id]) rescue nil
-        records = parent_record.children rescue nil
-        # bad hook but we need this component to build list with params defined in ActiveAdmin.register block
-        component = ObjectSpace.each_object(ActiveAdmin::Views::IndexAsSortable).first #
+        parent_record = resource_class.find(params[:parent_id]) rescue nil # Record to expand
+        records = parent_record.children rescue nil # Children of this record
+        # Create Arbre Component and render children
+        component = ActiveAdmin::Views::IndexAsSortable.new(Arbre::Context.new({}, view_context))
+        component.lazy_build(active_admin_config.get_page_presenter(:index))
         result = records.inject("") do |res, record|
           res + component.send(:build_nested_item, record)
         end
