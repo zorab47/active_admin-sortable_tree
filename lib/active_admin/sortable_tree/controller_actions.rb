@@ -49,7 +49,13 @@ module ActiveAdmin::SortableTree
       # action for lazy load
       collection_action :lazy_load, :method => :post do
         parent_record = resource_class.find(params[:parent_id])
-        records = parent_record.send(options[:children_method]).sort_by{ |child| child.send(options[:sorting_attribute]) }
+        records = parent_record.send(options[:children_method]).sort do |a, b|
+          if a.send(options[:sorting_attribute]) && b.send(options[:sorting_attribute])
+            a.send(options[:sorting_attribute]) <=> b.send(options[:sorting_attribute])
+          else
+            a.send(options[:sorting_attribute]) ? -1 : 1
+          end
+        end
         # Create Arbre Component and render children
         component = ActiveAdmin::Views::IndexAsSortable.new(Arbre::Context.new({}, view_context))
         component.lazy_build(active_admin_config.get_page_presenter(:index))
