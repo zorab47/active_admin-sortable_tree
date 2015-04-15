@@ -23,8 +23,8 @@ module ActiveAdmin
         build_list
       end
 
+      # Light version of build without @collection and build_list
       def lazy_build(page_presenter)
-        # Light version of build without @collection and build_list
         @page_presenter = page_presenter
         @collection = []
         @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
