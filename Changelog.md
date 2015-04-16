@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.1] - 2015-04-15
+
+- Suppress list styles on sortable indexes when batch actions are disabled.
+  ([#48](https://github.com/zorab47/activeadmin-sortable-tree/issues/48)).
+- Do not render the extra cell for batch actions when they are disabled, which
+  removes extra whitespace to the left of items.
+
 ## [0.2.0] - 2014-12-23
 
 - Shrink gem file size by excluding spec files and dummy application.
