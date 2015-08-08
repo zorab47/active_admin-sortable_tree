@@ -89,6 +89,15 @@ ActiveAdmin.register Page do
 end
 ```
 
+**Note**: If you are using the [acts_as_list](https://github.com/swanandp/acts_as_list) gem to manage a `:position` field (not required, but allows for other nice programmatic manipulation of ordered model lists), you must ensure a zero-based index for your list using the `top_of_list` option:
+
+```ruby
+class Page < ActiveRecord::Base
+  # Make this list act like a zero-indexed array to avoid off-by-one errors in your sorting
+  acts_as_list top_of_list: 0
+end
+```
+
 
 ## Usage (generic ActiveAdmin index)
 
