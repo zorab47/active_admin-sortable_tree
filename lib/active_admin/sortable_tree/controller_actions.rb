@@ -24,6 +24,10 @@ module ActiveAdmin::SortableTree
       collection_action :sort, :method => :post do
         resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
+        # Fix for Rails5, where params return an object instead of hash
+        # (http://eileencodes.com/posts/actioncontroller-parameters-now-returns-an-object-instead-of-a-hash/)
+        params = params.to_unsafe_h if params.respond_to?(:to_unsafe_h)
+
         records = params[resource_name].inject({}) do |res, (resource, parent_resource)|
           res[resource_class.find(resource)] = resource_class.find(parent_resource) rescue nil
           res
