@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = ActiveAdmin::SortableTree::VERSION
   s.authors     = ["Francesco Disperati", 'Charles Maresh']
   s.email       = ["me@nebirhos.com", 'zorab47@gmail.com']
-  s.homepage    = "https://github.com/zorab47/activeadmin-sortable_tree"
+  s.homepage    = "https://github.com/zorab47/active_admin-sortable_tree"
   s.summary     = "Add drag and drop sorting to ActiveAdmin resources"
   s.description = "SortableTree provides sorting of lists and hierarchies from ActiveAdmin index views."
   s.license     = "MIT"
