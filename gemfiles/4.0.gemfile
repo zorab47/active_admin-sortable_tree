@@ -2,6 +2,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ancestry'
 gem 'sqlite3'
+gem "mime_types", "~> 2.99.1" if RUBY_VERSION == "1.9.3"
 
 # ActiveAdmin 1.0.0pre
 gem 'activeadmin', github: 'gregbell/active_admin'
