@@ -1,4 +1,4 @@
-#= require jquery-ui/sortable
+#= require jquery-ui/widgets/sortable
 #= require jquery.mjs.nestedSortable
 
 window.ActiveAdminSortableEvent = do ->
