@@ -23,6 +23,14 @@ module ActiveAdmin
         build_list
       end
 
+      # Light version of build without @collection and build_list
+      def lazy_build(page_presenter)
+        @page_presenter = page_presenter
+        @collection = []
+        @resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
+        instance_eval &page_presenter.block if page_presenter.block
+      end
+
       def self.index_name; "sortable"; end
 
       def options
@@ -102,6 +110,8 @@ module ActiveAdmin
           "data-max-levels"      => options[:max_levels],
           "data-start-collapsed" => options[:start_collapsed],
           "data-protect-root"    => options[:protect_root],
+          "data-lazy-url"        => url_for(action: :lazy_load),
+          "data-lazy-enabled"    => lazy_load?
         }
       end
 
@@ -113,17 +123,19 @@ module ActiveAdmin
         end
       end
 
-      def build_nested_item(item)
-        li :id => "#{@resource_name}_#{item.id}" do
+      def lazy_load?
+        !!options[:lazy] && tree? # works only with tree
+      end
 
+      def build_nested_item(item)
+        li :id => "#{@resource_name}_#{item.id}", "data-item-id" => item.id do
           div :class => "item " << cycle("odd", "even", :name => "list_class") do
             if active_admin_config.batch_actions.any?
               div :class => "cell left" do
                 resource_selection_cell(item)
               end
             end
-
-            if options[:collapsible] && item.send(options[:children_method]).any?
+            if options[:collapsible] && item.send(options[:children_method]).exists?
               span :class => :disclose do
                 span
               end
@@ -140,7 +152,7 @@ module ActiveAdmin
           ol do
             item.send(options[:children_method]).order(options[:sorting_attribute]).each do |c|
               build_nested_item(c)
-            end
+            end unless lazy_load?
           end if tree?
         end
       end

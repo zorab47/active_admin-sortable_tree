@@ -49,6 +49,12 @@ RSpec.describe "ActiveAdmin::SortableTree", type: :feature do
 
       expect(top.children).to include(middle, bottom)
     end
+
+    context "with option `lazy: true`" do
+      it "load only roots" do
+        
+      end
+    end
   end
 
   context "with option `sortable: false`" do

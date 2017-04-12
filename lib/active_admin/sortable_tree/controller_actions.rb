@@ -13,7 +13,8 @@ module ActiveAdmin::SortableTree
                              :protect_root => false,
                              :collapsible => false, #hides +/- buttons
                              :start_collapsed => false,
-                             :sortable => true
+                             :sortable => true,
+                             :lazy => false
 
       # BAD BAD BAD FIXME: don't pollute original class
       @sortable_options = options
@@ -45,8 +46,25 @@ module ActiveAdmin::SortableTree
         end
       end
 
+      # action for lazy load
+      collection_action :lazy_load, :method => :post do
+        parent_record = resource_class.find(params[:parent_id])
+        records = parent_record.send(options[:children_method]).sort do |a, b|
+          if a.send(options[:sorting_attribute]) && b.send(options[:sorting_attribute])
+            a.send(options[:sorting_attribute]) <=> b.send(options[:sorting_attribute])
+          else
+            a.send(options[:sorting_attribute]) ? -1 : 1
+          end
+        end
+        # Create Arbre Component and render children
+        component = ActiveAdmin::Views::IndexAsSortable.new(Arbre::Context.new({}, view_context))
+        component.lazy_build(active_admin_config.get_page_presenter(:index))
+        result = records.inject("") do |res, record|
+          res + component.send(:build_nested_item, record)
+        end
+        render text: result.html_safe, status: 200, layout: false
+      end
     end
-
   end
 
   ::ActiveAdmin::ResourceDSL.send(:include, ControllerActions)
