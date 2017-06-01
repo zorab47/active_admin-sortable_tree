@@ -22,7 +22,7 @@ module ActiveAdmin::SortableTree
       config.paginate = false
 
       collection_action :sort, :method => :post do
-        resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
+        resource_name = ActiveAdmin::SortableTree::Compatibility.normalized_resource_name(active_admin_config.resource_name)
 
         records = []
         params[resource_name].each_pair do |resource, parent_resource|
