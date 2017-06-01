@@ -7,5 +7,5 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/dummy/public/assets
 spec/dummy/.sass-cache
-
+vendor/bundle
 Gemfile.lock

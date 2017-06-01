@@ -6,5 +6,7 @@ gem 'sqlite3'
 # ActiveAdmin 1.0.0pre
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'devise'
-gem 'rails', '~> 4.1'
-gem 'sass-rails', '~> 4.0.2'
+gem 'rails', '~> 5.1.0'
+gem 'sass-rails'
+
+# vim: ft=ruby

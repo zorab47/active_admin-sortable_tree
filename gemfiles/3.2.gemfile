@@ -5,3 +5,6 @@ gem "ancestry"
 gem "sass-rails"
 gem "sqlite3"
 gem "activeadmin", "~> 0.6.6"
+gem 'test-unit', '~> 3.0'
+
+# vim: ft=ruby
