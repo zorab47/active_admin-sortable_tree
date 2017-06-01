@@ -1,18 +1,26 @@
 language: ruby
 
 rvm:
-  - 2.1
   - 2.2
-  - 1.9.3
+  - 2.3
+  - 2.4
 
 env:
   - RAILS_VERSION=3.2
-  - RAILS_VERSION=4.0
-  - RAILS_VERSION=4.1
+  - RAILS_VERSION=4.2
+  - RAILS_VERSION=5.0
+  - RAILS_VERSION=5.1
 
 matrix:
   exclude:
     - rvm: 2.2
       env: RAILS_VERSION=3.2
+    - rvm: 2.4
+      env: RAILS_VERSION=3.2
+
+    - rvm: 2.2
+      env: RAILS_VERSION=5.0
+    - rvm: 2.2
+      env: RAILS_VERSION=5.1
 
 sudo: false
