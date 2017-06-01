@@ -24,10 +24,12 @@ module ActiveAdmin::SortableTree
       collection_action :sort, :method => :post do
         resource_name = active_admin_config.resource_name.to_s.underscore.parameterize('_')
 
-        records = params[resource_name].inject({}) do |res, (resource, parent_resource)|
-          res[resource_class.find(resource)] = resource_class.find(parent_resource) rescue nil
-          res
+        records = []
+        params[resource_name].each_pair do |resource, parent_resource|
+          parent_resource = resource_class.find(parent_resource) rescue nil
+          records << [resource_class.find(resource), parent_resource]
         end
+
         errors = []
         ActiveRecord::Base.transaction do
           records.each_with_index do |(record, parent_record), position|
