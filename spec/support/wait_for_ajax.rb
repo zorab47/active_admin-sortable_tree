@@ -5,7 +5,7 @@ module WaitForAjax
 
     yield
 
-    Timeout.timeout(Capybara.default_wait_time) do
+    Timeout.timeout(Capybara.default_max_wait_time) do
       loop until finished_all_ajax_requests?(count)
     end
 
