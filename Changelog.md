@@ -2,7 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.0.0] - 2017-06-01
+
+### Added
+
+- Support for Rails 5.0 and 5.1 by conditionally invoking `parameterize` with its
+  expected parameters.
+
+### Changed
+
+- Relax dependency on `jquery-ui-rails` to be `>= 5.0` (previously `~> 5.0`).
+
+### Removed
+
+- Ruby 1.9.3, 2.1, and 2.2 are no longer explicitly supported.
 
 ## [0.3.0] - 2016-09-08
 
@@ -32,8 +45,9 @@ All notable changes to this project will be documented in this file.
 - Published to Rubygems.
 
 
-[unreleased]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/zorab47/active_admin-sortable_tree/compare/v1.0.0...HEAD
 [0.1.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.0.1...v0.1.0
 [0.2.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.1.0...v0.2.0
 [0.2.1]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.0...v0.2.1
 [0.3.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.1...v0.3.0
+[1.0.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.3.0...v1.0.0
