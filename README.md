@@ -152,7 +152,7 @@ In `IndexAsSortable` you can add custom actions (with or without the defaults):
 ```ruby
 index :as => :sortable do
   actions defaults: false do |page|
-    link_to "Custom action", my_custon_path(page)
+    link_to "Custom action", my_custom_path(page)
   end
 end
 ```
