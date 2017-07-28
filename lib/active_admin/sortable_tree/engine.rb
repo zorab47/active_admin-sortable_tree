@@ -8,6 +8,7 @@ module ActiveAdmin
 
 
       def jquery_ui_six?
+        return false unless defined?(Jquery::Ui)
         Gem::Version.new(Jquery::Ui::Rails::VERSION) >= Gem::Version.new("6.0.0")
       end
 
@@ -22,11 +23,6 @@ module ActiveAdmin
       initializer "Rails precompile hook", group: :all do |app|
         app.config.assets.precompile += [ "active_admin/sortable.css",
                                           sortable_js ]
-      end
-
-      initializer "add assets" do
-        ActiveAdmin.application.register_stylesheet "active_admin/sortable.css"
-        ActiveAdmin.application.register_javascript sortable_js
       end
     end
   end
