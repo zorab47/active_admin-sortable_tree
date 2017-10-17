@@ -3,8 +3,7 @@ gem 'jquery-ui-rails'
 gem 'ancestry'
 gem 'sqlite3'
 
-# ActiveAdmin 1.0.0pre
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin'
 gem 'devise'
 gem 'rails', '~> 5.1.0'
 gem 'sass-rails'
