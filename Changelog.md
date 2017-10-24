@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2017-10-17
+
+### Changed
+
+- Update dependencies to only support ActiveAdmin `< 1.1.0` because `v1.1.0`
+  [dropped its dependency on `jquery-ui-rails`](https://github.com/activeadmin/activeadmin/blob/master/CHANGELOG.md).
+
 ## [1.0.0] - 2017-06-01
 
 ### Added
@@ -51,3 +58,4 @@ All notable changes to this project will be documented in this file.
 [0.2.1]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.0...v0.2.1
 [0.3.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.1...v0.3.0
 [1.0.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.3.0...v1.0.0
+[1.1.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v1.0.0...v1.1.0
