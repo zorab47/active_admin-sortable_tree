@@ -110,6 +110,17 @@ end
 
 Currently supports only IndexAsBlock, more to come!
 
+**Assets**:
+```ruby
+# app/assets/javascripts/active_admin.js
+//= require active_admin/sortable
+```
+
+```ruby
+# app/assets/stylesheets/active_admin.scss
+@import "active_admin/sortable";
+```
+
 **Admin**:
 ```ruby
 # app/admin/page.rb
