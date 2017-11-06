@@ -10,17 +10,22 @@ sortable via drag'n'drop.
 
 ## Installation
 
-```ruby
-# Gemfile
-gem "active_admin-sortable_tree"
-```
+1. Add SortableTree to your Gemfile; then `bundle install`
+    ```ruby
+    gem "active_admin-sortable_tree", "~> 2.0.0"
+    ```
 
-Note: If you experience issues with drag and drop capability, you may need to specify the version for your ActiveAdmin installation. It is reported working using v0.6.6, or if you are using v1.0.0.pre, it is reported working on this commit [b3a9f4b](https://github.com/activeadmin/activeadmin/commit/b3a9f4b3e4051447d011c59649a73f876989a199) or later.
+2. Add a require to your JavaScript manifest `app/assets/javascripts/active_admin.js`
 
-```ruby
-# Gemfile
-gem 'activeadmin', github: 'activeadmin', ref: 'b3a9f4b'
-```
+    ```javascript
+    //= require active_admin/sortable
+    ```
+
+3. Add an import in your stylesheet manifest `app/assets/javascripts/active_admin.js`
+
+    ```sass
+    @import "active_admin/sortable";
+    ```
 
 ## Usage (Tree)
 
@@ -157,7 +162,6 @@ index :as => :sortable do
 end
 ```
 
-
 ### Ajax Callback Config
 
 It exposes three Ajax Events: ajaxDone, ajaxFail and ajaxAlways, which
@@ -169,6 +173,29 @@ To subscribe Ajax callback:
 ActiveAdminSortableEvent.add('ajaxDone', function (){
   // do what you want
 })
+```
+
+### Upgrading to SortableTree 2.0 from 1.0
+
+Upgrading from SortableTree 1.x requires manually specifying assets in your
+`app/assets/javascripts/active_admin.js` and `app/assets/stylesheets/active_admin.scss`
+files.
+
+
+### Dependencies
+
+ActiveAdmin::SortableTree 2.0 supports ActiveAdmin 1.0.0+. For previous versions
+of ActiveAdmin use older SortableTree versions from the 1.x branch.
+
+Note: If you experience issues with drag and drop capability, you may need to
+specify the version for your ActiveAdmin installation. It is reported working
+using v0.6.6, or if you are using v1.0.0.pre, it is reported working on this
+commit [b3a9f4b](https://github.com/activeadmin/activeadmin/commit/b3a9f4b3e4051447d011c59649a73f876989a199)
+or later.
+
+```ruby
+# Gemfile
+gem 'activeadmin', github: 'activeadmin', ref: 'b3a9f4b'
 ```
 
 ## Semantic Versioning
