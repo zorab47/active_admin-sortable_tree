@@ -17,5 +17,7 @@ matrix:
       env: RAILS_VERSION=5.0
     - rvm: 2.2
       env: RAILS_VERSION=5.1
+  allow_failures:
+    - rvm: 2.5
 
 sudo: false
