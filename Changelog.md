@@ -17,6 +17,12 @@ All notable changes to this project will be documented in this file.
 - Remove support for Rails 3.2
 - Remove support for ActiveAdmin 0.6.6
 
+### Upgrading from 1.0.0
+
+It is suggested (but not required) to manually include the JavaScript and
+stylesheet to your manifest files in preparation for ActiveAdmin v2.0. See the
+Installation section of the [README.md](README.md#installation) for instructions.
+
 ## [1.0.0] - 2017-06-01
 
 ### Added
