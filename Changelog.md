@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.0] - 2018-01-22
+## [2.0.0] - 2018-01-22
 
 ### Changed
 
+- Depend on same version of `jquery-ui-rails` as ActiveAdmin
 - Update dependencies to only support ActiveAdmin `< 1.1.0` because `v1.1.0`
   [dropped its dependency on `jquery-ui-rails`](https://github.com/activeadmin/activeadmin/blob/master/CHANGELOG.md).
 - Remove usage of bourbon mixin; instead rely on ActiveAdmin's utilities mixin
