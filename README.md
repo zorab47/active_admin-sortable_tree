@@ -198,6 +198,23 @@ or later.
 gem 'activeadmin', github: 'activeadmin', ref: 'b3a9f4b'
 ```
 
+### Suppressing warnings from Active Admin
+
+As of Active Admin 1.1.0, `config.register_stylesheet` and `config.register_javascript` have been deprecated. `ActiveAdmin::SortableTree` uses these interfaces to register required assets automatically. Because of this, you may see a deprecation warning:
+
+```
+DEPRECATION WARNING: Active Admin: The `register_javascript` config is deprecated and will be removed
+in v2. Import your "active_admin/sortable.js" javascript in the active_admin.js.
+ (called from <main> at config/environment.rb:5)
+```
+
+You could opt out of it by setting `config.aa_sortable_tree.register_assets` to `false`:
+
+```ruby
+# config/application.rb
+config.aa_sortable_tree.register_assets = false
+```
+
 ## Semantic Versioning
 
 ActiveAdmin::SortableTree follows [semantic versioning](http://semver.org).
