@@ -9,11 +9,13 @@ rvm:
   - 2.3
   - 2.4
   - 2.5
+  - 2.6
 
 env:
   - RAILS_VERSION=4.2
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
+  - RAILS_VERSION=5.2
 
 matrix:
   exclude:
@@ -21,5 +23,7 @@ matrix:
       env: RAILS_VERSION=5.0
     - rvm: 2.2
       env: RAILS_VERSION=5.1
+    - rvm: 2.2
+      env: RAILS_VERSION=5.2
 
 sudo: false
