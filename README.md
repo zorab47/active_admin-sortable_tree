@@ -38,7 +38,7 @@ ActiveAdmin.register Page do
 
   index :as => :sortable do
     label :title # item content
-        actions
+    actions
   end
 end
 ```
