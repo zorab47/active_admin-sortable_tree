@@ -426,11 +426,11 @@
 
 			$(items).each(function() {
 				var res = ($(o.item || this).attr(o.attribute || 'id') || '')
-						.match(o.expression || (/(.+)[-=_](.+)/)),
+						.match(o.expression || (/(.+)[=_](.+)/)),
 				    pid = ($(o.item || this).parent(o.listType)
 						.parent(o.items)
 						.attr(o.attribute || 'id') || '')
-						.match(o.expression || (/(.+)[-=_](.+)/));
+						.match(o.expression || (/(.+)[=_](.+)/));
 
 				if (res) {
 					str.push(((o.key || res[1]) + '[' + (o.key && o.expression ? res[1] : res[2]) + ']')
