@@ -5,6 +5,6 @@ source "http://rubygems.org"
 # development dependencies will be added by default to the :development group.
 gemspec
 
-version = ENV['RAILS_VERSION'] || "4.0"
+version = ENV['RAILS_VERSION'] || "6.0"
 
 eval_gemfile File.expand_path("../gemfiles/#{version}.gemfile", __FILE__)
