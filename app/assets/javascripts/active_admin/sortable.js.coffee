@@ -58,6 +58,7 @@ $ ->
           url: $this.data("sortable-url")
           type: "post"
           data: $this.nestedSortable("serialize")
+          headers: { 'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content') }
         .always ->
           $this.find('.item').each (index) ->
             if index % 2
