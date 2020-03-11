@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2020-03-11
+
+### Added
+
+- A config to opt out of registering assets (see #81)
+- Support for UUID primary keys (see #85)
+
 ## [2.0.0] - 2018-01-22
 
 ### Changed
