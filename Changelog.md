@@ -80,3 +80,5 @@ Installation section of the [README.md](README.md#installation) for instructions
 [0.3.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.2.1...v0.3.0
 [1.0.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v0.3.0...v1.0.0
 [1.1.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v1.0.0...v1.1.0
+[2.0.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v1.1.0...v2.0.0
+[2.1.0]: https://github.com/zorab47/active_admin-sortable_tree/compare/v2.0.0...v2.1.0
