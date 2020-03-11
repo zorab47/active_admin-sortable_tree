@@ -23,7 +23,7 @@ sortable via drag'n'drop.
 
 3. Add an import in your stylesheet manifest `app/assets/stylesheets/active_admin.scss`
 
-    ```sass
+    ```scss
     @import "active_admin/sortable";
     ```
 
