@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
 
   s.files       = `git ls-files app lib vendor`.split($\) + ["Changelog.md", "README.md", "MIT-LICENSE"]
 
+  s.required_ruby_version = '>= 2.2'
+
   s.add_dependency 'activeadmin', '>= 1.1'
   s.add_dependency 'coffee-rails'
   s.add_dependency 'jquery-rails'
