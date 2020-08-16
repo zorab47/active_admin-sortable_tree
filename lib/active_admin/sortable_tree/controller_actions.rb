@@ -24,10 +24,13 @@ module ActiveAdmin::SortableTree
       collection_action :sort, :method => :post do
         resource_name = ActiveAdmin::SortableTree::Compatibility.normalized_resource_name(active_admin_config.resource_name)
 
+        # Query all resources at once to avoid N+1
+        ids = (params[resource_name].keys + params[resource_name].values).compact.uniq
+        resources = Hash[resource_class.where(id: ids).map { |r| [r.id.to_i, r] }]
+
         records = []
         params[resource_name].each_pair do |resource, parent_resource|
-          parent_resource = resource_class.find(parent_resource) rescue nil
-          records << [resource_class.find(resource), parent_resource]
+          records << [resources[resource.to_i], resources[parent_resource.to_i]]
         end
 
         errors = []
