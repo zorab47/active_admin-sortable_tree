@@ -15,6 +15,7 @@ env:
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
   - RAILS_VERSION=5.2
+  - RAILS_VERSION=6.0
 
 matrix:
   exclude:
