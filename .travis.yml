@@ -1,37 +1,37 @@
 language: ruby
 
-before_install:
-  # Workaround for https://github.com/travis-ci/travis-ci/issues/8969
-  - gem update --system
-
 rvm:
-  - 2.2
-  - 2.3
   - 2.4
   - 2.5
   - 2.6
+  - 2.7
 
 env:
   - RAILS_VERSION=4.2
   - RAILS_VERSION=5.0
   - RAILS_VERSION=5.1
   - RAILS_VERSION=5.2
+  - RAILS_VERSION=6.0
 
 matrix:
+  include:
+    - rvm: 2.4
+      before_install:
+        # Source: <https://docs.travis-ci.com/user/languages/ruby/#bundler-20>
+        - gem update --system '2.7.8' --no-document
+        - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+        - gem install bundler -v '< 2' --no-document
   exclude:
-    - rvm: 2.2
-      env: RAILS_VERSION=5.0
-    - rvm: 2.2
-      env: RAILS_VERSION=5.1
-    - rvm: 2.2
-      env: RAILS_VERSION=5.2
-    - rvm: 2.5
-      env: RAILS_VERSION=4.2
-    - rvm: 2.5
-      env: RAILS_VERSION=5.0
+    - rvm: 2.4
+      env: RAILS_VERSION=6.0
     - rvm: 2.6
       env: RAILS_VERSION=4.2
     - rvm: 2.6
+      env: RAILS_VERSION=5.0
+    - rvm: 2.7
+      env: RAILS_VERSION=4.2
+    - rvm: 2.7
       env: RAILS_VERSION=5.0
 
 sudo: false
+cache: bundler
