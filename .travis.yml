@@ -34,3 +34,4 @@ matrix:
       env: RAILS_VERSION=5.0
 
 sudo: false
+cache: bundler
