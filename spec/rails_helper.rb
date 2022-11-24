@@ -6,10 +6,10 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rails'
-require 'phantomjs/poltergeist'
+require "selenium-webdriver"
 require 'database_cleaner'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :selenium_headless
 
 def reload_menus!
   if Float(ENV['RAILS_VERSION']) >= 4.0
